@@ -7,7 +7,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Header currentPage="Home" />
+        <Header currentPage="Switch store" />
         <main className="wrapper">
           <SearchBar />
           <CardContainer />

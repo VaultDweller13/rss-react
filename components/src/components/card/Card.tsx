@@ -1,6 +1,8 @@
 import React from 'react';
+import CardButtons from './CardButtons';
+
 import './Card.css';
-import icon from '../assets/img/metacritic-icon.svg';
+import icon from '../../assets/img/metacritic-icon.svg';
 
 type CardProps = {
   title: string;
@@ -20,6 +22,7 @@ export default class Card extends React.Component<CardProps> {
           <img className="score_icon" src={icon} />
           <span className="score_value">{this.props.score}</span>
         </div>
+        <CardButtons />
       </div>
     );
   }

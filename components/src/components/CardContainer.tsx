@@ -1,6 +1,6 @@
 import React from 'react';
 import games from '../assets/data/games.json';
-import Card from './Card';
+import Card from './card/Card';
 
 export default class CardContainer extends React.Component {
   render() {
