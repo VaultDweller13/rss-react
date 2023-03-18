@@ -6,7 +6,7 @@ export default class Home extends React.Component {
     return (
       <>
         <Header currentPage="About us" />
-        <main>
+        <main className="wrapper">
           <h1>About page</h1>
         </main>
       </>

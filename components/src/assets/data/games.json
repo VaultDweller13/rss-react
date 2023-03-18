@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Bravely Default 2",
+    "img": "1.jpg",
+    "price": "59.99€"
+  },
+  {
+    "id": 2,
+    "title": "DRAGON QUEST XI S: Echoes of an Elusive Age – Definitive Edition",
+    "img": "2.jpg",
+    "price": "59.99€"
+  },
+  {
+    "id": 3,
+    "title": "Final Fantasy VII & Final Fantasy VIII Remastered Twin Pack",
+    "img": "3.jpg",
+    "price": "59.99€"
+  },
+  {
+    "id": 4,
+    "title": "Fire Emblem: Three Houses",
+    "img": "4.jpg",
+    "price": "59.99€"
+  },
+  {
+    "id": 5,
+    "title": "Hyrule Warriors: Age of Calamity",
+    "img": "5.jpg",
+    "price": "59.99€"
+  },
+  {
+    "id": 6,
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "img": "6.jpg",
+    "price": "59.99€"
+  }
+]

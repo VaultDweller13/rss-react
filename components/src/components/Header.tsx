@@ -7,7 +7,7 @@ type HeaderProps = {
 export default class Header extends React.Component<HeaderProps> {
   render() {
     return (
-      <header>
+      <header className="header wrapper">
         <h1>{this.props.currentPage}</h1>
       </header>
     );
