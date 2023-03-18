@@ -7,7 +7,7 @@ export default class NotFound extends React.Component {
       <>
         <Header currentPage="Page not found" />
         <main className="wrapper">
-          <h1>404</h1>
+          <h1 className="not-found">404</h1>
         </main>
       </>
     );
