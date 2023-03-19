@@ -6,6 +6,11 @@ describe('Search bar', () => {
     render(<SearchBar />);
 
     expect(screen.getByRole('searchbox')).toBeInTheDocument;
+  });
+
+  it('should have button', () => {
+    render(<SearchBar />);
+
     expect(screen.getByRole('button')).toBeInTheDocument;
   });
 });

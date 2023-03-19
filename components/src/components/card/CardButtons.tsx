@@ -9,6 +9,10 @@ export default class CardButtons extends React.Component {
     isFavorite: false,
   };
 
+  handleClick = () => {
+    this.setState({ isFavorite: !this.state.isFavorite });
+  };
+
   render() {
     return (
       <div className="card_buttons">
@@ -21,8 +25,4 @@ export default class CardButtons extends React.Component {
       </div>
     );
   }
-
-  handleClick = () => {
-    this.setState({ isFavorite: !this.state.isFavorite });
-  };
 }
