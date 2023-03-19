@@ -8,7 +8,7 @@ type CardProps = {
   title: string;
   img: string;
   price: string;
-  score: string;
+  score: number | null;
 };
 
 export default class Card extends React.Component<CardProps> {
@@ -20,10 +20,22 @@ export default class Card extends React.Component<CardProps> {
         <p className="card_price">{this.props.price}</p>
         <div className="card_score">
           <img className="score_icon" src={icon} />
-          <span className="score_value">{this.props.score}</span>
+          <span className={`score_value ${this.getScoreColorClass()}`}>
+            {this.props.score || 'N/A'}
+          </span>
         </div>
         <CardButtons />
       </div>
     );
+  }
+
+  getScoreColorClass() {
+    const { score } = this.props;
+
+    if (!score) return 'score_value__missing';
+    if (score > 75) return 'score_value__high';
+    if (score > 50) return 'score_value__average';
+
+    return 'score_value__low';
   }
 }

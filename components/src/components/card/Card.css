@@ -40,6 +40,21 @@
 .score_value {
   font-size: 18px;
   padding: 7px;
-  background-color: #6c3;
   color: #ffffff;
+}
+
+.score_value__average {
+  background-color: #ffc107;
+}
+
+.score_value__high {
+  background-color: #6c3;
+}
+
+.score_value__low {
+  background-color: #fd3843;
+}
+
+.score_value__missing {
+  background-color: #6c757d;
 }
