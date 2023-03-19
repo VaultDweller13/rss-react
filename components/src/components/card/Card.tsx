@@ -15,7 +15,7 @@ export default class Card extends React.Component<CardProps> {
   render() {
     return (
       <div className="card">
-        <img className="card_image" src={this.props.img} />
+        <img className="card_image" src={this.props.img} alt="Game cover" />
         <h3 className="card_title">{this.props.title}</h3>
         <p className="card_price">{this.props.price}</p>
         <div className="card_score">
