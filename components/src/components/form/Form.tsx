@@ -1,6 +1,8 @@
 import React from 'react';
 import './Form.css';
 import Select from './Select';
+import Checkboxes from './Checkboxes';
+import Radio from './Radio';
 
 export default class Form extends React.Component {
   render() {
@@ -19,12 +21,10 @@ export default class Form extends React.Component {
             <Select />
           </li>
           <li className="form_item">
-            <label htmlFor="form_game-genre">Genre</label>
-            <input type="checkbox" name="genre" id="form_game-genre" />
+            <Checkboxes />
           </li>
           <li className="form_item">
-            <label htmlFor="form_game-status">Status</label>
-            <input type="radio" name="status" id="form_game-status" />
+            <Radio />
           </li>
           <li className="form_item">
             <label htmlFor="form_game-cover">Cover Image</label>

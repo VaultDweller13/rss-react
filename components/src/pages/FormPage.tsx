@@ -7,7 +7,7 @@ export default class From extends React.Component {
     return (
       <>
         <Header currentPage="Add game" />
-        <Form />;
+        <Form />
       </>
     );
   }
