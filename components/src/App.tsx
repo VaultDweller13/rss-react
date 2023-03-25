@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
-import Form from './pages/Form';
+import FormPage from './pages/FormPage';
 
 export default class App extends React.Component {
   render() {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/form" element={<FormPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
