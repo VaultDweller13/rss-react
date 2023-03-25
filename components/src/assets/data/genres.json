@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "genre": "platform",
+    "label": "Platform"
+  },
+  {
+    "id": 2,
+    "genre": "action",
+    "label": "Action"
+  },
+  {
+    "id": 3,
+    "genre": "rpg",
+    "label": "RPG"
+  },
+  {
+    "id": 4,
+    "genre": "trpg",
+    "label": "TRPG"
+  },
+  {
+    "id": 5,
+    "genre": "jrpg",
+    "label": "JRPG"
+  },
+  {
+    "id": 6,
+    "genre": "racing",
+    "label": "Racing"
+  },
+  {
+    "id": 7,
+    "genre": "strategy",
+    "label": "Strategy"
+  },
+  {
+    "id": 8,
+    "genre": "adventure",
+    "label": "Adventure"
+  },
+  {
+    "id": 9,
+    "genre": "novel",
+    "label": "VN"
+  },
+  {
+    "id": 10,
+    "genre": "shooter",
+    "label": "Shooter"
+  },
+  {
+    "id": 11,
+    "genre": "puzzle",
+    "label": "Puzzle"
+  },
+  {
+    "id": 12,
+    "genre": "casual",
+    "label": "Casual"
+  }
+]

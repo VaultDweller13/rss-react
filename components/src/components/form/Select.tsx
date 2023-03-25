@@ -1,13 +1,22 @@
 import React from 'react';
 
-export default class Select extends React.Component {
+type SelectProp = {
+  forwardedRef: React.RefObject<HTMLSelectElement>;
+};
+
+export default class Select extends React.Component<SelectProp> {
   render() {
     return (
       <>
         <label htmlFor="form_game-platform" className="form_label">
           Platform:
         </label>
-        <select name="platform" id="form_game-platform" className="form_input input_select">
+        <select
+          ref={this.props.forwardedRef}
+          name="platform"
+          id="form_game-platform"
+          className="form_input input_select"
+        >
           <option value="switch">PC</option>
           <optgroup label="Nintendo" className="form_label">
             <option value="switch">Switch</option>
