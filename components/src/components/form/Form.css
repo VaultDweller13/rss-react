@@ -1,3 +1,63 @@
 .add-game_form {
-  border: 1px solid black;
+  max-width: 350px;
+  margin: 20px auto;
+  padding: 5px;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 10px 10px 0px 0px;
+}
+
+.form_container {
+  max-width: 300px;
+
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.form_item {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 0;
+}
+
+.form_label {
+  max-width: 300px;
+
+  margin: 0;
+  padding: 5px 0;
+
+  font-weight: normal;
+  font-size: medium;
+}
+
+.form_label,
+.checkbox_label,
+.form_input {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.form_input,
+.form_radio-container,
+.form_checkbox-container {
+  max-width: 300px;
+  padding: 5px;
+
+  border: none;
+  background-color: rgb(229 238 245);
+}
+
+.form_checkbox-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.labeledCheckbox_container {
+  padding: 5px;
+}
+
+.checkbox_label {
+  margin-left: 5px;
 }

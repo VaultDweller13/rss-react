@@ -3,13 +3,19 @@ import React from 'react';
 export default class Radio extends React.Component {
   render() {
     return (
-      <fieldset className="form_fieldset">
-        <legend>Game owned?</legend>
-        <label htmlFor="status_yes">Yes</label>
-        <input type="radio" name="status" id="status_yes" />
-        <label htmlFor="status_no">No</label>
-        <input type="radio" name="status" id="status_no" />
-      </fieldset>
+      <>
+        <h3 className="form_label">Format:</h3>
+        <div className="form_radio-container">
+          <label className="form_label" htmlFor="format_physical">
+            Physical
+          </label>
+          <input type="radio" name="format" id="format_physical" />
+          <label className="form_label" htmlFor="format_digital">
+            Digital
+          </label>
+          <input type="radio" name="format" id="format_digital" />
+        </div>
+      </>
     );
   }
 }

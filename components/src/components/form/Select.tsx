@@ -4,10 +4,12 @@ export default class Select extends React.Component {
   render() {
     return (
       <>
-        <label htmlFor="form_game-platform">Platform</label>
-        <select name="platform" id="form_game-platform">
+        <label htmlFor="form_game-platform" className="form_label">
+          Platform:
+        </label>
+        <select name="platform" id="form_game-platform" className="form_input input_select">
           <option value="switch">PC</option>
-          <optgroup label="Nintendo">
+          <optgroup label="Nintendo" className="form_label">
             <option value="switch">Switch</option>
             <option value="wiiu">Wii U</option>
             <option value="wii">Wii</option>
@@ -21,7 +23,7 @@ export default class Select extends React.Component {
             <option value="gbc">Game Boy Color</option>
             <option value="gb">Game Boy</option>
           </optgroup>
-          <optgroup label="PlayStation">
+          <optgroup label="PlayStation" className="form_label">
             <option value="ps5">PS5</option>
             <option value="ps4">PS4</option>
             <option value="ps3">PS3</option>
@@ -30,7 +32,7 @@ export default class Select extends React.Component {
             <option value="psv">PSVita</option>
             <option value="psp">PSP</option>
           </optgroup>
-          <optgroup label="Microsoft">
+          <optgroup label="Microsoft" className="form_label">
             <option value="xsex">Xbox Series X/S</option>
             <option value="xbone">Xbox One</option>
             <option value="x360">Xbox 360</option>
