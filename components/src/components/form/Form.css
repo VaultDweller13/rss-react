@@ -34,7 +34,7 @@
 }
 
 .form_label,
-.checkbox_label,
+.labeledInput_label,
 .form_input {
   color: rgba(0, 0, 0, 0.75);
 }
@@ -54,10 +54,15 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.labeledCheckbox_container {
+.form_radio-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.labeledInput_container {
   padding: 5px;
 }
 
-.checkbox_label {
+.labeledInput_label {
   margin-left: 5px;
 }

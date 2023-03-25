@@ -1,8 +1,7 @@
 import React from 'react';
 import './Form.css';
 import Select from './Select';
-import LabeledCheckbox from './LabeledCheckbox';
-import Radio from './Radio';
+import LabeledInput from './LabeledInput';
 
 export default class Form extends React.Component {
   render() {
@@ -38,22 +37,26 @@ export default class Form extends React.Component {
             <li className="form_item">
               <h3 className="form_label">Genres:</h3>
               <div className="form_checkbox-container">
-                <LabeledCheckbox name="genre" id="action" label="Action" />
-                <LabeledCheckbox name="genre" id="platform" label="Platform" />
-                <LabeledCheckbox name="genre" id="rpg" label="RPG" />
-                <LabeledCheckbox name="genre" id="trpg" label="TRPG" />
-                <LabeledCheckbox name="genre" id="jrpg" label="JRPG" />
-                <LabeledCheckbox name="genre" id="racing" label="Racing" />
-                <LabeledCheckbox name="genre" id="strategy" label="Strategy" />
-                <LabeledCheckbox name="genre" id="adventure" label="Adventure" />
-                <LabeledCheckbox name="genre" id="novel" label="VN" />
-                <LabeledCheckbox name="genre" id="shooter" label="Shooter" />
-                <LabeledCheckbox name="genre" id="puzzle" label="Puzzle" />
-                <LabeledCheckbox name="genre" id="casual" label="Casual" />
+                <LabeledInput type="checkbox" name="genre" id="platform" label="Platform" />
+                <LabeledInput type="checkbox" name="genre" id="action" label="Action" />
+                <LabeledInput type="checkbox" name="genre" id="rpg" label="RPG" />
+                <LabeledInput type="checkbox" name="genre" id="trpg" label="TRPG" />
+                <LabeledInput type="checkbox" name="genre" id="jrpg" label="JRPG" />
+                <LabeledInput type="checkbox" name="genre" id="racing" label="Racing" />
+                <LabeledInput type="checkbox" name="genre" id="strategy" label="Strategy" />
+                <LabeledInput type="checkbox" name="genre" id="adventure" label="Adventure" />
+                <LabeledInput type="checkbox" name="genre" id="novel" label="VN" />
+                <LabeledInput type="checkbox" name="genre" id="shooter" label="Shooter" />
+                <LabeledInput type="checkbox" name="genre" id="puzzle" label="Puzzle" />
+                <LabeledInput type="checkbox" name="genre" id="casual" label="Casual" />
               </div>
             </li>
             <li className="form_item">
-              <Radio />
+              <h3 className="form_label">Format:</h3>
+              <div className="form_radio-container">
+                <LabeledInput type="radio" name="format" id="digital" label="Digital" />
+                <LabeledInput type="radio" name="format" id="physical" label="Physical" />
+              </div>
             </li>
             <li className="form_item">
               <label className="form_label" htmlFor="form_game-cover">
