@@ -11,6 +11,9 @@ export default class Navbar extends React.Component {
         <Link to="/about" className="nav_link">
           About us
         </Link>
+        <Link to="/form" className="nav_link">
+          Add game
+        </Link>
       </nav>
     );
   }
