@@ -7,7 +7,8 @@
   padding: 10px 0;
 }
 
-.button_cart {
+.button_main {
+  min-height: 40px;
   padding: 0 16px;
 
   border: none;
@@ -21,7 +22,7 @@
   color: #ebebeb;
 }
 
-.button_cart:hover {
+.button_main:hover {
   background-color: #c90f2e;
   color: #ffffff;
   box-shadow: rgba(201, 15, 46, 0.2) 0px 7px 29px 0px;

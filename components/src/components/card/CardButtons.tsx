@@ -16,7 +16,7 @@ export default class CardButtons extends React.Component {
   render() {
     return (
       <div className="card_buttons">
-        <button type="button" className="button_cart">
+        <button type="button" className="button_main">
           Add to Cart
         </button>
         <button type="button" className="button_wishlist" onClick={this.handleClick}>

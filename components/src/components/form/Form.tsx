@@ -64,6 +64,10 @@ export default class Form extends React.Component {
               </label>
               <input type="file" name="cover" id="form_game-cover" />
             </li>
+
+            <li className="form_item">
+              <button className="button_main">Submit</button>
+            </li>
           </ul>
         </form>
       </main>
