@@ -17,7 +17,8 @@ export default class Select extends React.Component<SelectProp> {
           id="form_game-platform"
           className="form_input input_select"
         >
-          <option value="switch">PC</option>
+          <option value="">--Please choose an option--</option>
+          <option value="PC">PC</option>
           <optgroup label="Nintendo" className="form_label">
             <option value="switch">Switch</option>
             <option value="wiiu">Wii U</option>

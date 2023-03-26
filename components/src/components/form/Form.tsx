@@ -1,11 +1,18 @@
-import React, { RefObject } from 'react';
+import React, { ReactElement, RefObject } from 'react';
 
 import './Form.css';
 import Select from './Select';
 import LabeledInput from './LabeledInput';
 import genres from '../../assets/data/genres.json';
+import Card from '../card/Card';
+import { textInputIsValid, dateInputIsValid } from '../../utils/validation';
 
-export default class Form extends React.Component {
+type State = {
+  cards: ReactElement[];
+  validation: Record<string, string>;
+};
+
+export default class Form extends React.Component<unknown, State> {
   titleInput: RefObject<HTMLInputElement>;
   dateInput: RefObject<HTMLInputElement>;
   platformInput: RefObject<HTMLSelectElement>;
@@ -13,6 +20,7 @@ export default class Form extends React.Component {
   digitalInput: RefObject<HTMLInputElement>;
   physicalInput: RefObject<HTMLInputElement>;
   imageInput: RefObject<HTMLInputElement>;
+  index: number;
 
   constructor(props: never) {
     super(props);
@@ -23,19 +31,105 @@ export default class Form extends React.Component {
     this.digitalInput = React.createRef();
     this.physicalInput = React.createRef();
     this.imageInput = React.createRef();
+    this.state = {
+      cards: [],
+      validation: {
+        title: '',
+        date: '',
+        platform: '',
+        genres: '',
+        format: '',
+        image: '',
+      },
+    };
+    this.index = 0;
   }
 
   onSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
-    console.log(
-      this.titleInput.current?.value,
-      this.dateInput.current?.value,
-      this.platformInput.current?.value,
-      this.genresInput.map((input) => input.current?.checked),
-      this.digitalInput.current?.checked,
-      this.physicalInput.current?.checked,
-      this.imageInput.current?.value
-    );
+    this.resetValidationMessages();
+    let isValid = true;
+
+    if (!textInputIsValid(this.titleInput.current)) {
+      this.setValidationMessage('title', "You must provide game's title");
+      isValid = false;
+    }
+
+    if (!dateInputIsValid(this.dateInput.current)) {
+      this.setValidationMessage('date', 'The first game was made in 1950');
+      isValid = false;
+    }
+
+    if (!textInputIsValid(this.platformInput.current)) {
+      this.setValidationMessage('platform', 'Please choose a platform');
+      isValid = false;
+    }
+
+    if (this.genresInput.map((input) => input.current?.checked).every((box) => !box)) {
+      this.setValidationMessage('genres', 'Please choose at least one genre');
+      isValid = false;
+    }
+
+    if (!(this.digitalInput.current?.checked || this.physicalInput.current?.checked)) {
+      this.setValidationMessage('format', 'Please specify game format');
+      isValid = false;
+    }
+
+    if (!this.imageInput.current?.files?.length) {
+      this.setValidationMessage('image', 'Please provide cover image');
+      isValid = false;
+    }
+
+    if (isValid) this.addCard();
+  };
+
+  setValidationMessage(
+    field: 'title' | 'date' | 'platform' | 'genres' | 'format' | 'image',
+    message: string
+  ) {
+    this.setState((prevState) => ({
+      ...prevState,
+      validation: {
+        ...prevState.validation,
+        [field]: message,
+      },
+    }));
+  }
+
+  resetValidationMessages() {
+    this.setState((prev) => ({
+      ...prev,
+      validation: {
+        title: '',
+        date: '',
+        platform: '',
+        genres: '',
+        format: '',
+        image: '',
+      },
+    }));
+  }
+
+  addCard = () => {
+    this.index++;
+
+    let imgSrc = URL.createObjectURL(new Blob([]));
+
+    if (this.imageInput.current && this.imageInput.current.files?.length)
+      imgSrc = URL.createObjectURL(this.imageInput.current?.files[0]);
+
+    this.setState((prevState) => ({
+      cards: [
+        ...prevState.cards,
+        <Card
+          key={this.index}
+          title={this.titleInput.current?.value || 'dummy title'}
+          img={imgSrc}
+          price="111"
+          score={99}
+        />,
+      ],
+    }));
   };
 
   render() {
@@ -126,6 +220,7 @@ export default class Form extends React.Component {
             </li>
           </ul>
         </form>
+        {this.state.cards}
       </main>
     );
   }
