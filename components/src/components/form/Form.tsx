@@ -56,7 +56,7 @@ export default class Form extends React.Component<unknown, State> {
     }
 
     if (!dateInputIsValid(this.dateInput.current)) {
-      this.setValidationMessage('date', 'The first game was made in 1950');
+      this.setValidationMessage('date', 'The first game was made in the 1950');
       isValid = false;
     }
 
@@ -148,6 +148,7 @@ export default class Form extends React.Component<unknown, State> {
                 className="form_input input_text"
                 ref={this.titleInput}
               />
+              <p className="validation-message">{this.state.validation.title}</p>
             </li>
             <li className="form_item">
               <label className="form_label" htmlFor="form_game-date">
@@ -160,9 +161,11 @@ export default class Form extends React.Component<unknown, State> {
                 className="form_input input_date"
                 ref={this.dateInput}
               />
+              <p className="validation-message">{this.state.validation.date}</p>
             </li>
             <li className="form_item">
               <Select forwardedRef={this.platformInput} />
+              <p className="validation-message">{this.state.validation.platform}</p>
             </li>
             <li className="form_item">
               <h3 className="form_label">Genres:</h3>
@@ -178,6 +181,7 @@ export default class Form extends React.Component<unknown, State> {
                   />
                 ))}
               </div>
+              <p className="validation-message">{this.state.validation.genres}</p>
             </li>
             <li className="form_item">
               <h3 className="form_label">Format:</h3>
@@ -199,6 +203,7 @@ export default class Form extends React.Component<unknown, State> {
                   forwardedRef={this.physicalInput}
                 />
               </div>
+              <p className="validation-message">{this.state.validation.format}</p>
             </li>
             <li className="form_item">
               <label className="form_label" htmlFor="form_game-cover">
@@ -212,6 +217,7 @@ export default class Form extends React.Component<unknown, State> {
                 ref={this.imageInput}
                 className="form_input input_file"
               />
+              <p className="validation-message">{this.state.validation.image}</p>
             </li>
             <li className="form_item">
               <button className="button_main" onClick={this.onSubmit}>

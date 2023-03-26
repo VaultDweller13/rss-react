@@ -13,14 +13,14 @@
 
   list-style: none;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 15px 10px;
 }
 
 .form_item {
   display: flex;
   flex-direction: column;
 
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .form_label {
@@ -94,4 +94,15 @@
 
 .input_file::file-selector-button:hover {
   background-color: #5582a1;
+}
+
+.validation-message {
+  height: 17px;
+  bottom: 0;
+
+  padding-top: 2px;
+  margin: 0;
+
+  font-size: small;
+  color: #e31235;
 }
