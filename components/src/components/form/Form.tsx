@@ -116,6 +116,7 @@ export default class Form extends React.Component {
                 id="form_game-cover"
                 accept="image/png, image/jpeg"
                 ref={this.imageInput}
+                className="form_input input_file"
               />
             </li>
             <li className="form_item">
