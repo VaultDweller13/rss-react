@@ -4,8 +4,9 @@ import './Form.css';
 import Select from './Select';
 import LabeledInput from './LabeledInput';
 import genres from '../../assets/data/genres.json';
-import Card from '../card/Card';
-import { textInputIsValid, dateInputIsValid } from '../../utils/validation';
+import CustomCard from '../card/CustomCard';
+import { textInputIsValid, dateInputIsValid, platformInpitIsValid } from '../../utils/validation';
+import type { CustomCardProps } from '../../utils/types';
 
 type State = {
   cards: ReactElement[];
@@ -51,12 +52,12 @@ export default class Form extends React.Component<unknown, State> {
     let isValid = true;
 
     if (!textInputIsValid(this.titleInput.current)) {
-      this.setValidationMessage('title', "You must provide game's title");
+      this.setValidationMessage('title', "You must provide the game's title");
       isValid = false;
     }
 
     if (!dateInputIsValid(this.dateInput.current)) {
-      this.setValidationMessage('date', 'The first game was made in the 1950');
+      this.setValidationMessage('date', 'The first game ever was made in the 1950');
       isValid = false;
     }
 
@@ -65,18 +66,18 @@ export default class Form extends React.Component<unknown, State> {
       isValid = false;
     }
 
-    if (this.genresInput.map((input) => input.current?.checked).every((box) => !box)) {
-      this.setValidationMessage('genres', 'Please choose at least one genre');
+    if (!platformInpitIsValid(this.genresInput)) {
+      this.setValidationMessage('genres', 'Please choose 1 to 3 genres');
       isValid = false;
     }
 
     if (!(this.digitalInput.current?.checked || this.physicalInput.current?.checked)) {
-      this.setValidationMessage('format', 'Please specify game format');
+      this.setValidationMessage('format', "Please specify the game's format");
       isValid = false;
     }
 
     if (!this.imageInput.current?.files?.length) {
-      this.setValidationMessage('image', 'Please provide cover image');
+      this.setValidationMessage('image', 'Please provide a cover image');
       isValid = false;
     }
 
@@ -110,23 +111,50 @@ export default class Form extends React.Component<unknown, State> {
     }));
   }
 
+  getCardProps() {
+    if (!this.titleInput.current) return;
+    if (!this.dateInput.current) return;
+    if (!this.platformInput.current) return;
+    if (!this.imageInput.current) return;
+    if (!this.imageInput.current.files) return;
+
+    const genres = this.genresInput
+      .map((ref) => {
+        if (ref.current && ref.current.checked) return ref.current.value;
+      })
+      .filter((genre) => genre) as string[];
+
+    const imgSrc = URL.createObjectURL(this.imageInput.current?.files[0]);
+
+    return {
+      title: this.titleInput.current.value,
+      date: this.dateInput.current.value,
+      platform: this.platformInput.current.value,
+      genres: genres,
+      format: this.digitalInput.current?.checked ? ('digital' as const) : ('physical' as const),
+      img: imgSrc,
+      price: '59.99',
+      score: null,
+    };
+  }
+
   addCard = () => {
     this.index++;
 
-    let imgSrc = URL.createObjectURL(new Blob([]));
-
-    if (this.imageInput.current && this.imageInput.current.files?.length)
-      imgSrc = URL.createObjectURL(this.imageInput.current?.files[0]);
-
+    const props = this.getCardProps() as CustomCardProps;
     this.setState((prevState) => ({
       cards: [
         ...prevState.cards,
-        <Card
+        <CustomCard
           key={this.index}
-          title={this.titleInput.current?.value || 'dummy title'}
-          img={imgSrc}
-          price="111"
-          score={99}
+          date={props.date}
+          platform={props.platform}
+          genres={props.genres}
+          format={props.format}
+          title={props.title}
+          img={props.img}
+          price={props.price}
+          score={props.score}
         />,
       ],
     }));
@@ -134,7 +162,7 @@ export default class Form extends React.Component<unknown, State> {
 
   render() {
     return (
-      <main className="wrapper">
+      <main className="wrapper form_wrapper">
         <form className="add-game_form">
           <ul className="form_container">
             <li className="form_item">
@@ -178,6 +206,7 @@ export default class Form extends React.Component<unknown, State> {
                     id={genre.genre}
                     label={genre.label}
                     forwardedRef={this.genresInput[index]}
+                    value={genre.label}
                   />
                 ))}
               </div>

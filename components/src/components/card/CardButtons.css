@@ -32,6 +32,7 @@
 
 .button_wishlist {
   cursor: pointer;
+  margin-right: auto;
 
   background: none;
   border: none;

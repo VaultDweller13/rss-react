@@ -1,6 +1,14 @@
+.form_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 15px;
+
+  padding: 20px 0;
+}
+
 .add-game_form {
   max-width: 350px;
-  margin-top: 20px;
   padding: 5px;
 
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -105,4 +113,29 @@
 
   font-size: small;
   color: #e31235;
+}
+
+.card_genres {
+  grid-column: 1 / 3;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+
+  padding: 10px 0;
+}
+
+.genres_item {
+  padding: 2px 4px;
+  background-color: rgb(229 238 245);
+
+  border-radius: 5px;
+}
+
+.card_logo {
+  grid-column: 2 / 3;
+
+  width: 32px;
+  height: 32px;
 }

@@ -24,7 +24,7 @@ export default class Card extends React.Component<CardProps> {
             {this.props.score || 'N/A'}
           </span>
         </div>
-        <CardButtons />
+        <CardButtons platform="switch" />
       </div>
     );
   }
