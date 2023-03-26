@@ -1,9 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
-
-type HeaderProps = {
-  currentPage: string;
-};
+import type { HeaderProps } from '../utils/types';
 
 export default class Header extends React.Component<HeaderProps> {
   render() {

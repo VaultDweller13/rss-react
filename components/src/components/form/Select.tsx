@@ -1,10 +1,7 @@
 import React from 'react';
+import { SelectProps } from '../../utils/types';
 
-type SelectProp = {
-  forwardedRef: React.RefObject<HTMLSelectElement>;
-};
-
-export default class Select extends React.Component<SelectProp> {
+export default class Select extends React.Component<SelectProps> {
   render() {
     return (
       <>

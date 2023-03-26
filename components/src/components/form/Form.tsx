@@ -1,19 +1,14 @@
-import React, { ReactElement, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 import './Form.css';
 import Select from './Select';
 import LabeledInput from './LabeledInput';
 import genres from '../../assets/data/genres.json';
-import CustomCard from '../card/CustomCard';
+import CustomCard from '../card/Card';
 import { textInputIsValid, dateInputIsValid, platformInpitIsValid } from '../../utils/validation';
-import type { CustomCardProps } from '../../utils/types';
+import type { CardProps, FormState } from '../../utils/types';
 
-type State = {
-  cards: ReactElement[];
-  validation: Record<string, string>;
-};
-
-export default class Form extends React.Component<unknown, State> {
+export default class Form extends React.Component<unknown, FormState> {
   titleInput: RefObject<HTMLInputElement>;
   dateInput: RefObject<HTMLInputElement>;
   platformInput: RefObject<HTMLSelectElement>;
@@ -141,7 +136,7 @@ export default class Form extends React.Component<unknown, State> {
   addCard = () => {
     this.index++;
 
-    const props = this.getCardProps() as CustomCardProps;
+    const props = this.getCardProps() as CardProps;
     this.setState((prevState) => ({
       cards: [
         ...prevState.cards,
@@ -163,7 +158,7 @@ export default class Form extends React.Component<unknown, State> {
   render() {
     return (
       <main className="wrapper form_wrapper">
-        <form className="add-game_form">
+        <form className="add-game_form" aria-label="Add a game form">
           <ul className="form_container">
             <li className="form_item">
               <label className="form_label" htmlFor="form_game-title">

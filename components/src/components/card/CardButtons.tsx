@@ -3,12 +3,9 @@ import React from 'react';
 import './CardButtons.css';
 import fav from '../../assets/img/favorite_empty.svg';
 import favFilled from '../../assets/img/favorite_filled.svg';
+import type { CardButtonsProps } from '../../utils/types';
 
-type Props = {
-  platform: string;
-};
-
-export default class CardButtons extends React.Component<Props> {
+export default class CardButtons extends React.Component<CardButtonsProps> {
   state = {
     isFavorite: false,
   };

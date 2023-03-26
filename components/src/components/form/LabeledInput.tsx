@@ -1,15 +1,7 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import type { LabeledInputProps } from '../../utils/types';
 
-type InputProps = {
-  name: string;
-  id: string;
-  label: string;
-  type: 'checkbox' | 'radio';
-  value?: string;
-  forwardedRef: RefObject<HTMLInputElement>;
-};
-
-export default class LabeledInput extends React.Component<InputProps> {
+export default class LabeledInput extends React.Component<LabeledInputProps> {
   render() {
     const { name, id, label, type } = this.props;
 

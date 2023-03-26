@@ -16,7 +16,7 @@ export default defineConfig({
       all: true,
       provider: 'c8',
       include: ['src'],
-      exclude: ['src/main.tsx', 'src/*.d.ts', 'src/tests'],
+      exclude: ['src/main.tsx', 'src/*.d.ts', 'src/tests', 'src/utils/types.ts'],
       reporter: 'text',
     },
   },
