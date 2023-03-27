@@ -81,6 +81,7 @@ export default class Form extends React.Component<unknown, FormState> {
     if (isValid) {
       this.addCard();
       this.form.current?.reset();
+      alert('Game added!');
     }
   };
 
