@@ -9,6 +9,7 @@ import { textInputIsValid, dateInputIsValid, platformInpitIsValid } from '../../
 import type { CardProps, FormState } from '../../utils/types';
 
 export default class Form extends React.Component<unknown, FormState> {
+  form: RefObject<HTMLFormElement>;
   titleInput: RefObject<HTMLInputElement>;
   dateInput: RefObject<HTMLInputElement>;
   platformInput: RefObject<HTMLSelectElement>;
@@ -20,6 +21,7 @@ export default class Form extends React.Component<unknown, FormState> {
 
   constructor(props: never) {
     super(props);
+    this.form = React.createRef();
     this.titleInput = React.createRef();
     this.dateInput = React.createRef();
     this.platformInput = React.createRef();
@@ -76,7 +78,10 @@ export default class Form extends React.Component<unknown, FormState> {
       isValid = false;
     }
 
-    if (isValid) this.addCard();
+    if (isValid) {
+      this.addCard();
+      this.form.current?.reset();
+    }
   };
 
   setValidationMessage(
@@ -158,7 +163,7 @@ export default class Form extends React.Component<unknown, FormState> {
   render() {
     return (
       <main className="wrapper form_wrapper">
-        <form className="add-game_form" aria-label="Add a game form">
+        <form className="add-game_form" aria-label="Add a game form" ref={this.form}>
           <ul className="form_container">
             <li className="form_item">
               <label className="form_label" htmlFor="form_game-title">
