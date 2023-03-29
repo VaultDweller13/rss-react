@@ -1,6 +1,6 @@
 import React from 'react';
 import './SearchBar.css';
-import icon from '../assets/img/search.svg';
+import icon from '../../assets/img/search.svg';
 
 export default class SearchBar extends React.Component {
   state = {

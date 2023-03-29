@@ -1,4 +1,4 @@
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/searchBar/SearchBar';
 import React from 'react';
 import Header from '../components/Header';
 import CardContainer from '../components/CardContainer';
