@@ -9,26 +9,18 @@ import { textInputIsValid, dateInputIsValid, platformInpitIsValid } from '../../
 import type { CardProps, FormState } from '../../utils/types';
 
 export default class Form extends React.Component<unknown, FormState> {
-  form: RefObject<HTMLFormElement>;
-  titleInput: RefObject<HTMLInputElement>;
-  dateInput: RefObject<HTMLInputElement>;
-  platformInput: RefObject<HTMLSelectElement>;
-  genresInput: RefObject<HTMLInputElement>[];
-  digitalInput: RefObject<HTMLInputElement>;
-  physicalInput: RefObject<HTMLInputElement>;
-  imageInput: RefObject<HTMLInputElement>;
-  index: number;
+  form: RefObject<HTMLFormElement> = React.createRef();
+  titleInput: RefObject<HTMLInputElement> = React.createRef();
+  dateInput: RefObject<HTMLInputElement> = React.createRef();
+  platformInput: RefObject<HTMLSelectElement> = React.createRef();
+  genresInput: RefObject<HTMLInputElement>[] = genres.map(() => React.createRef());
+  digitalInput: RefObject<HTMLInputElement> = React.createRef();
+  physicalInput: RefObject<HTMLInputElement> = React.createRef();
+  imageInput: RefObject<HTMLInputElement> = React.createRef();
+  index = 0;
 
-  constructor(props: never) {
+  constructor(props: unknown) {
     super(props);
-    this.form = React.createRef();
-    this.titleInput = React.createRef();
-    this.dateInput = React.createRef();
-    this.platformInput = React.createRef();
-    this.genresInput = genres.map(() => React.createRef());
-    this.digitalInput = React.createRef();
-    this.physicalInput = React.createRef();
-    this.imageInput = React.createRef();
     this.state = {
       cards: [],
       validation: {
@@ -40,7 +32,6 @@ export default class Form extends React.Component<unknown, FormState> {
         image: '',
       },
     };
-    this.index = 0;
   }
 
   onSubmit = (event: React.MouseEvent) => {
@@ -144,20 +135,7 @@ export default class Form extends React.Component<unknown, FormState> {
 
     const props = this.getCardProps() as CardProps;
     this.setState((prevState) => ({
-      cards: [
-        ...prevState.cards,
-        <CustomCard
-          key={this.index}
-          date={props.date}
-          platform={props.platform}
-          genres={props.genres}
-          format={props.format}
-          title={props.title}
-          img={props.img}
-          price={props.price}
-          score={props.score}
-        />,
-      ],
+      cards: [...prevState.cards, <CustomCard key={this.index} {...props} />],
     }));
   };
 
