@@ -20,7 +20,6 @@ describe('dateInputIsValid', () => {
   it('should return false if year < 1950', () => {
     const input = document.createElement('input');
     input.setAttribute('value', '03-27-1900');
-    console.log(input.value);
 
     expect(dateInputIsValid(input)).toBeFalsy();
   });
