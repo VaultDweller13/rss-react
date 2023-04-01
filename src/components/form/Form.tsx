@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import './Form.css';
 import Select from './Select';
 import LabeledInput from './LabeledInput';
 import genres from '../../assets/data/genres.json';
 import CustomCard from '../card/Card';
-import { textInputIsValid, dateInputIsValid, platformInpitIsValid } from '../../utils/validation';
+import { textInputIsValid, dateInputIsValid, genresInputIsValid } from '../../utils/validation';
 import type { CardProps } from '../../utils/types';
+
+type Inputs = {
+  title: string;
+  date: string;
+  platform: string;
+  genres: string[];
+  format: string;
+  image: FileList;
+};
 
 export default function Form() {
   const form = React.createRef<HTMLFormElement>();
@@ -27,48 +37,57 @@ export default function Form() {
     format: '',
     image: '',
   });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-  const onSubmit = (event: React.MouseEvent) => {
-    event.preventDefault();
-    resetValidationMessages();
-    let isValid = true;
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
 
-    if (!textInputIsValid(titleInput.current)) {
-      setValidationMessage('title', "You must provide the game's title");
-      isValid = false;
-    }
+  // const onSubmit = (event: React.MouseEvent) => {
+  //   event.preventDefault();
+  //   resetValidationMessages();
+  //   let isValid = true;
 
-    if (!dateInputIsValid(dateInput.current)) {
-      setValidationMessage('date', 'The first game ever was made in the 1950');
-      isValid = false;
-    }
+  //   if (!textInputIsValid(titleInput.current)) {
+  //     setValidationMessage('title', "You must provide the game's title");
+  //     isValid = false;
+  //   }
 
-    if (!textInputIsValid(platformInput.current)) {
-      setValidationMessage('platform', 'Please choose a platform');
-      isValid = false;
-    }
+  //   if (!dateInputIsValid(dateInput.current)) {
+  //     setValidationMessage('date', 'The first game ever was made in the 1950');
+  //     isValid = false;
+  //   }
 
-    if (!platformInpitIsValid(genresInput)) {
-      setValidationMessage('genres', 'Please choose 1 to 3 genres');
-      isValid = false;
-    }
+  //   if (!textInputIsValid(platformInput.current)) {
+  //     setValidationMessage('platform', 'Please choose a platform');
+  //     isValid = false;
+  //   }
 
-    if (!(digitalInput.current?.checked || physicalInput.current?.checked)) {
-      setValidationMessage('format', "Please specify the game's format");
-      isValid = false;
-    }
+  //   if (!platformInpitIsValid(genresInput)) {
+  //     setValidationMessage('genres', 'Please choose 1 to 3 genres');
+  //     isValid = false;
+  //   }
 
-    if (!imageInput.current?.files?.length) {
-      setValidationMessage('image', 'Please provide a cover image');
-      isValid = false;
-    }
+  //   if (!(digitalInput.current?.checked || physicalInput.current?.checked)) {
+  //     setValidationMessage('format', "Please specify the game's format");
+  //     isValid = false;
+  //   }
 
-    if (isValid) {
-      addCard();
-      form.current?.reset();
-      alert('Game added!');
-    }
-  };
+  //   if (!imageInput.current?.files?.length) {
+  //     setValidationMessage('image', 'Please provide a cover image');
+  //     isValid = false;
+  //   }
+
+  //   if (isValid) {
+  //     addCard();
+  //     form.current?.reset();
+  //     alert('Game added!');
+  //   }
+  // };
 
   const setValidationMessage = (
     field: 'title' | 'date' | 'platform' | 'genres' | 'format' | 'image',
@@ -125,7 +144,7 @@ export default function Form() {
 
   return (
     <main className="wrapper form_wrapper">
-      <form className="add-game_form" aria-label="Add a game form" ref={form}>
+      <form className="add-game_form" aria-label="Add a game form" ref={form} onSubmit={onSubmit}>
         <ul className="form_container">
           <li className="form_item">
             <label className="form_label" htmlFor="form_game-title">
@@ -133,12 +152,11 @@ export default function Form() {
             </label>
             <input
               type="text"
-              name="title"
               id="form_game-title"
               className="form_input input_text"
-              ref={titleInput}
+              {...register('title', { required: "You must provide the game's title" })}
             />
-            <p className="validation-message">{validationMessages.title}</p>
+            <p className="validation-message">{errors.title?.message}</p>
           </li>
           <li className="form_item">
             <label className="form_label" htmlFor="form_game-date">
@@ -146,55 +164,61 @@ export default function Form() {
             </label>
             <input
               type="date"
-              name="date"
               id="form_game-date"
               className="form_input input_date"
-              ref={dateInput}
+              {...register('date', { required: true, validate: dateInputIsValid })}
             />
-            <p className="validation-message">{validationMessages.date}</p>
+            <p className="validation-message">{errors.date?.message}</p>
           </li>
           <li className="form_item">
-            <Select forwardedRef={platformInput} />
-            <p className="validation-message">{validationMessages.platform}</p>
+            <Select register={register} />
+            <p className="validation-message">{errors.platform?.message}</p>
           </li>
           <li className="form_item">
             <h3 className="form_label">Genres:</h3>
             <div className="form_checkbox-container">
               {genres.map((genre, index) => (
                 <LabeledInput
+                  register={register}
                   key={genre.id}
                   type="checkbox"
                   name="genre"
                   id={genre.genre}
                   label={genre.label}
-                  forwardedRef={genresInput[index]}
                   value={genre.label}
+                  forwardedRef={genresInput[index]}
                 />
               ))}
             </div>
-            <p className="validation-message">{validationMessages.genres}</p>
+            <p className="validation-message">
+              {genresInputIsValid(
+                genresInput
+                  .map((input) => input.current?.value)
+                  .filter((value) => value) as string[]
+              )}
+            </p>
           </li>
           <li className="form_item">
             <h3 className="form_label">Format:</h3>
             <div className="form_radio-container">
               <LabeledInput
-                type="radio"
+                register={register}
                 name="format"
+                type="radio"
                 id="digital"
                 label="Digital"
                 value="digital"
-                forwardedRef={digitalInput}
               />
               <LabeledInput
-                type="radio"
+                register={register}
                 name="format"
+                type="radio"
                 id="physical"
                 label="Physical"
                 value="physical"
-                forwardedRef={physicalInput}
               />
             </div>
-            <p className="validation-message">{validationMessages.format}</p>
+            <p className="validation-message">{errors.format?.message}</p>
           </li>
           <li className="form_item">
             <label className="form_label" htmlFor="form_game-cover">
@@ -202,18 +226,15 @@ export default function Form() {
             </label>
             <input
               type="file"
-              name="cover"
               id="form_game-cover"
               accept="image/png, image/jpeg"
-              ref={imageInput}
               className="form_input input_file"
+              {...register('image', { required: true })}
             />
-            <p className="validation-message">{validationMessages.image}</p>
+            <p className="validation-message">{errors.image?.message}</p>
           </li>
           <li className="form_item">
-            <button className="button_main" onClick={onSubmit}>
-              Submit
-            </button>
+            <button className="button_main">Submit</button>
           </li>
         </ul>
       </form>

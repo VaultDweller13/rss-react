@@ -7,8 +7,7 @@ export default function Select(props: SelectProps) {
         Platform:
       </label>
       <select
-        ref={props.forwardedRef}
-        name="platform"
+        {...props.register('platform', { required: 'Please choose a platform' })}
         id="form_game-platform"
         className="form_input input_select"
       >

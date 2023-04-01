@@ -1,4 +1,5 @@
-import { ReactElement, RefObject } from 'react';
+import { ReactElement, Ref } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
 type CardProps = {
   title: string;
@@ -16,8 +17,17 @@ type FormState = {
   validation: Record<string, string>;
 };
 
+type Inputs = {
+  title: string;
+  date: string;
+  platform: string;
+  genres: string[];
+  format: string;
+  image: FileList;
+};
+
 type SelectProps = {
-  forwardedRef: React.RefObject<HTMLSelectElement>;
+  register: UseFormRegister<Inputs>;
 };
 
 type LabeledInputProps = {
@@ -26,7 +36,9 @@ type LabeledInputProps = {
   label: string;
   type: 'checkbox' | 'radio';
   value?: string;
-  forwardedRef: RefObject<HTMLInputElement>;
+  register: UseFormRegister<Inputs>;
+  validate?: (value: string) => boolean | string;
+  forwardedRef?: Ref<HTMLInputElement>;
 };
 
 type CardButtonsProps = {
@@ -37,4 +49,12 @@ type HeaderProps = {
   currentPage: string;
 };
 
-export type { CardProps, FormState, SelectProps, LabeledInputProps, CardButtonsProps, HeaderProps };
+export type {
+  CardProps,
+  FormState,
+  SelectProps,
+  LabeledInputProps,
+  CardButtonsProps,
+  HeaderProps,
+  Inputs,
+};
