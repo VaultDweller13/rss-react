@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <Header currentPage="About us" />
       <main className="wrapper">
-        <h1>About page</h1>
+        <h2>About page</h2>
       </main>
     </>
   );

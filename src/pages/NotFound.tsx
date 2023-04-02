@@ -5,7 +5,7 @@ export default function NotFound() {
     <>
       <Header currentPage="Page not found" />
       <main className="wrapper">
-        <h1 className="not-found">404</h1>
+        <h2 className="not-found">404</h2>
       </main>
     </>
   );
