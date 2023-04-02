@@ -24,7 +24,7 @@ export default function Form() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({ reValidateMode: 'onSubmit' });
 
   const onSubmit = handleSubmit((data) => {
     addCard(data);
