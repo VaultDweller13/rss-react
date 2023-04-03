@@ -12,7 +12,7 @@ export default function SearchBar() {
   };
 
   useEffect(() => {
-    localStorage.setItem('searchInput', input);
+    return () => localStorage.setItem('searchInput', input);
   }, [input]);
 
   return (
