@@ -1,30 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import './SearchBar.css';
 import icon from '../../assets/img/search.svg';
 
 export default function SearchBar() {
-  const [input, setInput] = useState(localStorage.getItem('searchInput') || '');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!(event.target instanceof HTMLInputElement)) return;
-
-    setInput(event.target.value);
-  };
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    return () => localStorage.setItem('searchInput', input);
-  }, [input]);
+    const current = inputRef.current;
+    if (current) current.value = localStorage.getItem('searchInput') || '';
+
+    return () => {
+      localStorage.setItem('searchInput', current?.value || '');
+    };
+  }, []);
 
   return (
     <div className="search-bar">
       <form className="search_form">
-        <input
-          type="search"
-          className="search_input"
-          placeholder="Search"
-          onChange={handleChange}
-          value={input}
-        />
+        <input type="search" className="search_input" placeholder="Search" ref={inputRef} />
         <button type="button" className="search_button">
           <img src={icon} alt="Search icon" className="search_icon" />
         </button>
