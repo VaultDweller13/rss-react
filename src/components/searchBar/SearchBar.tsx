@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import './SearchBar.css';
-import icon from '../../assets/img/search.svg';
+import { search_icon } from '../../assets/';
 
 export default function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +20,7 @@ export default function SearchBar() {
       <form className="search_form">
         <input type="search" className="search_input" placeholder="Search" ref={inputRef} />
         <button type="button" className="search_button">
-          <img src={icon} alt="Search icon" className="search_icon" />
+          <img src={search_icon} alt="Search icon" className="search_icon" />
         </button>
       </form>
     </div>

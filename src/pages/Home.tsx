@@ -1,6 +1,4 @@
-import SearchBar from '../components/searchBar/SearchBar';
-import Header from '../components/Header';
-import CardContainer from '../components/CardContainer';
+import { SearchBar, Header, CardContainer } from '../components';
 
 export default function Home() {
   return (

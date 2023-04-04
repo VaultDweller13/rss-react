@@ -1,5 +1,5 @@
-import CardButtons from './CardButtons';
-import icon from '../../assets/img/metacritic-icon.svg';
+import { CardButtons } from '../';
+import { metacritic_icon } from '../../assets/';
 import './Card.css';
 
 type CardProps = {
@@ -36,7 +36,7 @@ export default function Card(props: CardProps) {
         <p className="card_format">{props.format}</p>
       </div>
       <div className="card_score">
-        <img className="score_icon" src={icon} />
+        <img className="score_icon" src={metacritic_icon} />
         <span className={`score_value ${getScoreColorClass(props.score)}`}>
           {props.score || 'N/A'}
         </span>

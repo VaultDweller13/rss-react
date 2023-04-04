@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import './CardButtons.css';
-import fav from '../../assets/img/favorite_empty.svg';
-import favFilled from '../../assets/img/favorite_filled.svg';
+import { favorite_empty, favorite_filled } from '../../assets/';
 
 type CardButtonsProps = {
   platform: string;
@@ -21,7 +20,7 @@ export default function CardButtons(props: CardButtonsProps) {
         Add to Cart
       </button>
       <button type="button" className="button_wishlist" onClick={handleClick}>
-        <img className="wishlist-icon" src={isFavorite ? favFilled : fav} />
+        <img className="wishlist-icon" src={isFavorite ? favorite_filled : favorite_empty} />
       </button>
       <img src={`${path}${props.platform}.svg`} className="card_logo" />
     </div>

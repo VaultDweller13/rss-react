@@ -1,5 +1,4 @@
-import Form from '../components/form/Form';
-import Header from '../components/Header';
+import { Form, Header } from '../components';
 
 export default function From() {
   return (

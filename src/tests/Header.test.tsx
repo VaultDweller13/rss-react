@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Header from '../components/Header';
-import { HeaderProps } from '../utils/types';
+import Header from '../components/header/Header';
 
 const props = {
   currentPage: 'Test page',
-} as HeaderProps;
+};
 
 describe('Header', () => {
   it('should have title with current page name', () => {

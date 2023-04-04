@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Select, Card } from '../';
+import { genres } from '../../assets';
 import './Form.css';
-import Select from './Select';
-import genres from '../../assets/data/genres.json';
-import Card from '../card/Card';
 
 type Inputs = {
   title: string;
