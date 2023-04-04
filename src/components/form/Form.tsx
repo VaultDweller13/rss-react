@@ -5,14 +5,13 @@ import './Form.css';
 import Select from './Select';
 import genres from '../../assets/data/genres.json';
 import Card from '../card/Card';
-import type { CardProps } from '../../utils/types';
 
 type Inputs = {
   title: string;
   date: string;
   platform: string;
   genres: string[];
-  format: string;
+  format: 'digital' | 'physical';
   image: FileList;
 };
 
@@ -42,7 +41,7 @@ export default function Form() {
       img: URL.createObjectURL(data.image[0]),
       price: '59.99',
       score: null,
-    } as CardProps;
+    };
 
     setCards((prevState) => [...prevState, <Card key={prevState.length + 1} {...props} />]);
   };

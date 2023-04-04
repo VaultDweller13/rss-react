@@ -3,7 +3,10 @@ import { useState } from 'react';
 import './CardButtons.css';
 import fav from '../../assets/img/favorite_empty.svg';
 import favFilled from '../../assets/img/favorite_filled.svg';
-import type { CardButtonsProps } from '../../utils/types';
+
+type CardButtonsProps = {
+  platform: string;
+};
 
 export default function CardButtons(props: CardButtonsProps) {
   const [isFavorite, setFavorite] = useState(false);

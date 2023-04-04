@@ -1,7 +1,17 @@
 import CardButtons from './CardButtons';
-import type { CardProps } from '../../utils/types';
 import icon from '../../assets/img/metacritic-icon.svg';
 import './Card.css';
+
+type CardProps = {
+  title: string;
+  date: string;
+  platform: string;
+  genres: string[];
+  format: 'digital' | 'physical';
+  img: string;
+  price: string;
+  score: number | null;
+};
 
 export default function Card(props: CardProps) {
   const genres = props.genres.map((genre, index) => (

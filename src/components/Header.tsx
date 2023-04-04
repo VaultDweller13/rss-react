@@ -1,5 +1,8 @@
 import Navbar from './Navbar';
-import type { HeaderProps } from '../utils/types';
+
+type HeaderProps = {
+  currentPage: string;
+};
 
 export default function Header(props: HeaderProps) {
   return (

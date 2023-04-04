@@ -1,4 +1,15 @@
-import { SelectProps } from '../../utils/types';
+import { UseFormRegister } from 'react-hook-form';
+
+type SelectProps = {
+  register: UseFormRegister<{
+    title: string;
+    date: string;
+    platform: string;
+    genres: string[];
+    format: 'digital' | 'physical';
+    image: FileList;
+  }>;
+};
 
 export default function Select(props: SelectProps) {
   return (
