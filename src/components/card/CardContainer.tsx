@@ -1,5 +1,5 @@
 import Card from './Card';
-import { getData } from '../../services/api';
+import { getRawGamesData } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 type Platform = {
@@ -8,7 +8,7 @@ type Platform = {
   name: string;
 };
 
-type Tag = {
+type Genre = {
   id: number;
   name: string;
 };
@@ -18,7 +18,7 @@ type GameData = {
   name: string;
   released: string;
   parent_platforms: Record<'platform', Platform>[];
-  tags: Tag[];
+  genres: Genre[];
   background_image: string;
   metacritic: number;
 };
@@ -28,7 +28,7 @@ export default function CardContainer() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setData(await getData());
+      setData(await getRawGamesData());
     };
 
     fetchData();
@@ -38,8 +38,8 @@ export default function CardContainer() {
     id: game.id,
     title: game.name,
     date: game.released,
-    platform: game.parent_platforms[0].platform.name,
-    genres: game.tags.map((tag) => tag.name),
+    platform: 'switch',
+    genres: game.genres.map((genre) => genre.name),
     format: 'digital' as const,
     img: game.background_image,
     price: '59.99',
