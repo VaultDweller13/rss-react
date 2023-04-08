@@ -6,15 +6,16 @@ enum Platforms {
   SWITCH = '7',
 }
 
-const params = {
-  platforms: Platforms.SWITCH,
-  ordering: '-metacritic',
-  exclude_additions: 'true',
-  key: API_KEY,
-};
-
-async function getRawGamesData() {
+async function getRawGamesData(search = '') {
+  const params = {
+    platforms: Platforms.SWITCH,
+    ordering: '-metacritic',
+    search: search,
+    search_precise: 'true',
+    key: API_KEY,
+  };
   const url = createUrl(endpoint, params);
+  console.log(url);
   const response = await fetch(url, { mode: 'cors' });
 
   return (await response.json()).results;

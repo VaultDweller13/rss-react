@@ -23,16 +23,22 @@ type GameData = {
   metacritic: number;
 };
 
-export default function CardContainer() {
+type CardContainerProps = {
+  searchQuery: string;
+};
+
+export default function CardContainer(props: CardContainerProps) {
+  const { searchQuery } = props;
   const [data, setData] = useState<GameData[]>([]);
+  console.log('props:', searchQuery);
 
   useEffect(() => {
     const fetchData = async () => {
-      setData(await getRawGamesData());
+      setData(await getRawGamesData(searchQuery));
     };
 
     fetchData();
-  }, []);
+  }, [searchQuery]);
 
   const gamesArray = data.map((game) => ({
     id: game.id,
