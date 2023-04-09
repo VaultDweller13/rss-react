@@ -11,7 +11,7 @@ async function getRawGamesData(search = '') {
     platforms: Platforms.SWITCH,
     ordering: '-metacritic',
     search: search,
-    search_precise: 'true',
+    search_precise: 'false',
     key: API_KEY,
   };
   const url = createUrl(endpoint, params);

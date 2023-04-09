@@ -40,9 +40,11 @@ export default function Form() {
       img: URL.createObjectURL(data.image[0]),
       price: '59.99',
       score: null,
+      onClick: () => {},
+      id: cards.length + 1,
     };
 
-    setCards((prevState) => [...prevState, <Card key={prevState.length + 1} {...props} />]);
+    setCards((prevState) => [...prevState, <Card key={props.id} {...props} />]);
   };
 
   return (

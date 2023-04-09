@@ -21,11 +21,11 @@ export default function SearchBar(props: SearchBarProps) {
     return () => {
       localStorage.setItem('searchInput', current?.value || '');
       callback(current?.value || '');
-      console.log(current?.value);
     };
   }, [callback]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     const current = inputRef.current;
     if (current) {
       localStorage.setItem('searchInput', current?.value || '');
@@ -37,7 +37,11 @@ export default function SearchBar(props: SearchBarProps) {
     <div className="search-bar">
       <form className="search_form">
         <input type="search" className="search_input" placeholder="Search" ref={inputRef} />
-        <button type="button" className="search_button" onClick={handleClick}>
+        <button
+          type="submit"
+          className="search_button"
+          onClick={(e: React.MouseEvent) => handleClick(e)}
+        >
           <img src={search_icon} alt="Search icon" className="search_icon" />
         </button>
       </form>
