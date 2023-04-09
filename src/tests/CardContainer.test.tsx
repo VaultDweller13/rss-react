@@ -1,12 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
-import CardContainer from '../components/card/CardContainer';
+import { CardContainer } from '../components';
 
 describe('CardContainer', () => {
-  it('should render <Card> elements', () => {
-    render(<CardContainer />);
+  it('should render <Card> elements', async () => {
+    render(<CardContainer searchQuery="" />);
 
-    expect(screen.getByText('Fire Emblem: Three Houses')).toBeInTheDocument;
-    expect(screen.getByText('The Legend of Zelda: Breath of the Wild')).toBeInTheDocument;
+    await waitFor(() => {
+      expect(screen.getByText('Super Mario Odyssey')).toBeInTheDocument;
+      expect(screen.getByText('The Legend of Zelda: Breath of the Wild')).toBeInTheDocument;
+    });
   });
 });

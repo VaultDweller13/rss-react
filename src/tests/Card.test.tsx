@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Card from '../components/card/Card';
+import { Card } from '../components/';
 
 const data = {
   id: 1,
@@ -16,12 +16,12 @@ const data = {
 
 describe('Card', () => {
   it('should render game title', () => {
-    render(<Card {...data} />);
+    render(<Card {...data} onClick={() => {}} />);
     expect(screen.getByRole('heading')).toHaveTextContent(data.title);
   });
 
   it('should have game cover image', () => {
-    render(<Card {...data} />);
+    render(<Card {...data} onClick={() => {}} />);
     expect(screen.getAllByRole('img')[0]).toHaveAccessibleName('Game cover');
   });
 });
