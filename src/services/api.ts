@@ -21,6 +21,13 @@ async function getRawGamesData(search = '') {
   return (await response.json()).results;
 }
 
+async function getDataById(id: number) {
+  const url = `${endpoint}/${id}?key=${API_KEY}`;
+  const response = await fetch(url, { mode: 'cors' });
+
+  return await response.json();
+}
+
 function createUrl(url: string, params: Record<string, string>) {
   const query = Object.entries(params)
     .map(([key, value]) => `${key}=${value}`)
@@ -29,4 +36,4 @@ function createUrl(url: string, params: Record<string, string>) {
   return `${url}?${query}`;
 }
 
-export { getRawGamesData };
+export { getRawGamesData, getDataById };

@@ -2,7 +2,8 @@ import CardButtons from './CardButtons';
 import { metacritic_icon } from '../../assets/';
 import './Card.css';
 
-type CardProps = {
+export type CardProps = {
+  id: number;
   title: string;
   date: string;
   platform: string;
@@ -11,10 +12,10 @@ type CardProps = {
   img: string;
   price: string;
   score: number | null;
-  onClick: () => void;
+  onClick: (id: number) => void;
 };
 
-export default function Card(props: CardProps) {
+export function Card(props: CardProps) {
   const genres = props.genres.map((genre, index) => (
     <span key={index} className="genres_item">
       {genre}
@@ -28,7 +29,7 @@ export default function Card(props: CardProps) {
   });
 
   return (
-    <div className="card" onClick={props.onClick}>
+    <div className="card" onClick={() => props.onClick(props.id)}>
       <img className="card_image" src={props.img} alt="Game cover" />
       <h3 className="card_title">{props.title}</h3>
       <div className="card_genres">{genres}</div>

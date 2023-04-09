@@ -1,6 +1,6 @@
-import Card from './Card';
+import { Card, CardProps } from './Card';
 import { Modal } from '../';
-import { getRawGamesData } from '../../services/api';
+import { getRawGamesData, getDataById } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 type Platform = {
@@ -31,9 +31,12 @@ export default function CardContainer(props: CardContainerProps) {
   const { searchQuery } = props;
   const [data, setData] = useState<GameData[]>([]);
   const [active, setActive] = useState(false);
+  const [currentId, setCurrentId] = useState<number>();
+  const [currentGame, setCurrentGame] = useState<CardProps>();
 
-  const handleClick = () => {
+  const handleClick = (id: number) => {
     setActive(true);
+    setCurrentId(id);
   };
 
   useEffect(() => {
@@ -43,6 +46,29 @@ export default function CardContainer(props: CardContainerProps) {
 
     fetchData();
   }, [searchQuery]);
+
+  useEffect(() => {
+    if (!currentId) return;
+
+    const fetchData = async () => {
+      const gameData = (await getDataById(currentId)) as GameData;
+
+      setCurrentGame({
+        id: gameData.id,
+        title: gameData.name,
+        date: gameData.released,
+        platform: 'switch',
+        genres: ['N/A'],
+        format: 'digital' as const,
+        img: gameData.background_image,
+        price: '59.99',
+        score: gameData.metacritic,
+        onClick: () => {},
+      });
+    };
+
+    fetchData();
+  }, [currentId]);
 
   const gamesArray = data.map((game) => ({
     id: game.id,
@@ -63,7 +89,15 @@ export default function CardContainer(props: CardContainerProps) {
   return (
     <>
       <section className="cards-container">{cards}</section>;
-      <Modal active={active} setActive={setActive} child={<>Hello</>} />
+      <Modal
+        active={active}
+        setActive={setActive}
+        child={
+          (currentGame && <Card key={currentGame.id} {...currentGame} onClick={() => {}} />) || (
+            <>Loading...</>
+          )
+        }
+      />
     </>
   );
 }
