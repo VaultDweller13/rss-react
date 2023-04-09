@@ -1,4 +1,5 @@
-export { Card as Card } from './card/Card';
+export { Card } from './card/Card';
+export { CardLarge } from './card/CardLarge';
 export { default as CardContainer } from './card/CardContainer';
 export { default as Modal } from './modal/Modal';
 export { default as Navbar } from './navbar/Navbar';

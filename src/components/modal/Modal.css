@@ -2,11 +2,14 @@
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   transform: scale(0);
 
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .active {
@@ -14,8 +17,9 @@
 }
 
 .modal_content {
-  width: 200px;
-  height: 200px;
+  width: 60%;
 
-  background-color: wheat;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
 }

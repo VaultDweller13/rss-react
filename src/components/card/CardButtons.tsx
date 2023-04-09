@@ -5,6 +5,7 @@ import { favorite_empty, favorite_filled } from '../../assets/';
 
 type CardButtonsProps = {
   platform: string;
+  className?: string;
 };
 
 export default function CardButtons(props: CardButtonsProps) {
@@ -15,7 +16,7 @@ export default function CardButtons(props: CardButtonsProps) {
   };
 
   return (
-    <div className="card_buttons">
+    <div className={`card_buttons ${props.className}`}>
       <button type="button" className="button_main">
         Add to Cart
       </button>

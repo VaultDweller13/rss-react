@@ -1,4 +1,5 @@
-import { Card, CardProps } from './Card';
+import { Card } from './Card';
+import { CardLarge, LargeCardProps } from './CardLarge';
 import { Modal } from '../';
 import { getRawGamesData, getDataById } from '../../services/api';
 import { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ type GameData = {
   genres: Genre[];
   background_image: string;
   metacritic: number;
+  description?: string;
 };
 
 type CardContainerProps = {
@@ -32,7 +34,7 @@ export default function CardContainer(props: CardContainerProps) {
   const [data, setData] = useState<GameData[]>([]);
   const [active, setActive] = useState(false);
   const [currentId, setCurrentId] = useState<number>();
-  const [currentGame, setCurrentGame] = useState<CardProps>();
+  const [currentGame, setCurrentGame] = useState<LargeCardProps>();
 
   const handleClick = (id: number) => {
     setActive(true);
@@ -58,12 +60,12 @@ export default function CardContainer(props: CardContainerProps) {
         title: gameData.name,
         date: gameData.released,
         platform: 'switch',
-        genres: ['N/A'],
+        genres: gameData.genres.map((genre) => genre.name),
         format: 'digital' as const,
         img: gameData.background_image,
         price: '59.99',
         score: gameData.metacritic,
-        onClick: () => {},
+        description: gameData.description || '',
       });
     };
 
@@ -88,15 +90,11 @@ export default function CardContainer(props: CardContainerProps) {
 
   return (
     <>
-      <section className="cards-container">{cards}</section>;
+      <section className="cards-container">{cards}</section>
       <Modal
         active={active}
         setActive={setActive}
-        child={
-          (currentGame && <Card key={currentGame.id} {...currentGame} onClick={() => {}} />) || (
-            <>Loading...</>
-          )
-        }
+        child={(currentGame && <CardLarge {...currentGame} />) || <>Loading...</>}
       />
     </>
   );

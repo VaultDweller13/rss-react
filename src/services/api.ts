@@ -15,7 +15,6 @@ async function getRawGamesData(search = '') {
     key: API_KEY,
   };
   const url = createUrl(endpoint, params);
-  console.log(url);
   const response = await fetch(url, { mode: 'cors' });
 
   return (await response.json()).results;
