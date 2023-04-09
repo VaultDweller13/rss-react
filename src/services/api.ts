@@ -1,6 +1,8 @@
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const endpoint = 'https://api.rawg.io/api/games';
 
+type QueryParams = Record<string, string>;
+
 enum Platforms {
   PC = '1',
   SWITCH = '7',
@@ -14,25 +16,33 @@ async function getRawGamesData(search = '') {
     search_precise: 'false',
     key: API_KEY,
   };
-  const url = createUrl(endpoint, params);
-  const response = await fetch(url, { mode: 'cors' });
 
-  return (await response.json()).results;
+  return (await fetchData('', params)).results;
 }
 
-async function getDataById(id: number) {
-  const url = `${endpoint}/${id}?key=${API_KEY}`;
-  const response = await fetch(url, { mode: 'cors' });
-
-  return await response.json();
+function getDataById(id: number) {
+  return fetchData(`/${id}`, {
+    key: API_KEY,
+  });
 }
 
-function createUrl(url: string, params: Record<string, string>) {
-  const query = Object.entries(params)
-    .map(([key, value]) => `${key}=${value}`)
-    .join('&');
+async function fetchData(path: string, params: QueryParams) {
+  const url = createUrl(endpoint, path, params);
+  const response = await fetch(url, { mode: 'cors' });
 
-  return `${url}?${query}`;
+  return response.json();
+}
+
+function createUrl(url: string, path?: string, params?: QueryParams) {
+  let query = '';
+
+  if (params) {
+    query = Object.entries(params)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&');
+  }
+
+  return `${url}${path}?${query}`;
 }
 
 export { getRawGamesData, getDataById };
