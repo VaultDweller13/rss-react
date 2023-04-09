@@ -1,4 +1,4 @@
-import { CardButtons } from '../';
+import CardButtons from './CardButtons';
 import { metacritic_icon } from '../../assets/';
 import './Card.css';
 
@@ -11,6 +11,7 @@ type CardProps = {
   img: string;
   price: string;
   score: number | null;
+  onClick: () => void;
 };
 
 export default function Card(props: CardProps) {
@@ -27,7 +28,7 @@ export default function Card(props: CardProps) {
   });
 
   return (
-    <div className="card">
+    <div className="card" onClick={props.onClick}>
       <img className="card_image" src={props.img} alt="Game cover" />
       <h3 className="card_title">{props.title}</h3>
       <div className="card_genres">{genres}</div>

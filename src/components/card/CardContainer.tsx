@@ -1,10 +1,10 @@
 import Card from './Card';
+import { Modal } from '../';
 import { getRawGamesData } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 type Platform = {
   id: number;
-  // name: 'PC' | 'Playstation' | 'Xbox' | 'Nintendo';
   name: string;
 };
 
@@ -30,7 +30,11 @@ type CardContainerProps = {
 export default function CardContainer(props: CardContainerProps) {
   const { searchQuery } = props;
   const [data, setData] = useState<GameData[]>([]);
-  console.log('props:', searchQuery);
+  const [active, setActive] = useState(false);
+
+  const handleClick = () => {
+    setActive(true);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +56,14 @@ export default function CardContainer(props: CardContainerProps) {
     score: game.metacritic,
   }));
 
-  const cards = gamesArray.map((game) => <Card key={game.id} {...game} img={game.img} />);
+  const cards = gamesArray.map((game) => (
+    <Card key={game.id} {...game} img={game.img} onClick={handleClick} />
+  ));
 
-  return <section className="cards-container">{cards}</section>;
+  return (
+    <>
+      <section className="cards-container">{cards}</section>;
+      <Modal active={active} setActive={setActive} child={<>Hello</>} />
+    </>
+  );
 }
