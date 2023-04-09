@@ -7,19 +7,36 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  transform: scale(0);
+
+  opacity: 0;
+  transition: 0.3s all;
+  pointer-events: none;
 
   background-color: rgba(0, 0, 0, 0.6);
 }
 
 .active {
-  transform: scale(1);
+  display: flex;
+  transition: 0.3s all;
+  opacity: 1;
+  pointer-events: all;
 }
 
 .modal_content {
   width: 60%;
+  max-height: 80%;
+  min-height: 40%;
+  overflow: hidden;
 
   padding: 10px;
   border-radius: 20px;
   background-color: white;
+
+  transform: scale(0.5);
+  transition: 0.3s all;
+}
+
+.modal_content.active {
+  transform: scale(1);
+  transition: 0.3s all;
 }

@@ -29,3 +29,8 @@
 .card-large_buttons {
   grid-column: 1 / 2;
 }
+
+.card_purchase.card-large_purchase,
+.card_score.card-large_score {
+  grid-row: 4 / 5;
+}

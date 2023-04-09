@@ -9,7 +9,10 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   return (
     <div className={props.active ? 'modal active' : 'modal'} onClick={() => props.setActive(false)}>
-      <div className="modal_content" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={props.active ? 'modal_content active' : 'modal_content'}
+        onClick={(e) => e.stopPropagation()}
+      >
         {props.child}
       </div>
     </div>

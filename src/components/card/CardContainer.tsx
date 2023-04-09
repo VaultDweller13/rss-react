@@ -1,6 +1,6 @@
 import { Card } from './Card';
 import { CardLarge, LargeCardProps } from './CardLarge';
-import { Modal } from '../';
+import { Modal, Spinner } from '../';
 import { getRawGamesData, getDataById } from '../../services/api';
 import { useEffect, useState } from 'react';
 
@@ -70,6 +70,8 @@ export default function CardContainer(props: CardContainerProps) {
     };
 
     fetchData();
+
+    return () => setCurrentGame(undefined);
   }, [currentId]);
 
   const gamesArray = data.map((game) => ({
@@ -90,11 +92,11 @@ export default function CardContainer(props: CardContainerProps) {
 
   return (
     <>
-      <section className="cards-container">{cards}</section>
+      <section className="cards-container">{cards.length > 0 ? cards : <Spinner />}</section>
       <Modal
         active={active}
         setActive={setActive}
-        child={(currentGame && <CardLarge {...currentGame} />) || <>Loading...</>}
+        child={(currentGame && <CardLarge {...currentGame} />) || <Spinner />}
       />
     </>
   );
