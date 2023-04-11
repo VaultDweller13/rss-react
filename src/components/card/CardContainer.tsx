@@ -4,13 +4,7 @@ import { Modal, Spinner } from '../';
 import { getRawGamesData, getDataById } from '../../services/api';
 import { useEffect, useState } from 'react';
 
-type Platform = {
-  id: number;
-  name: string;
-};
-
-type Genre = {
-  id: number;
+type FetchedName = {
   name: string;
 };
 
@@ -18,8 +12,8 @@ type GameData = {
   id: number;
   name: string;
   released: string;
-  parent_platforms: Record<'platform', Platform>[];
-  genres: Genre[];
+  parent_platforms: Record<'platform', FetchedName>[];
+  genres: FetchedName[];
   background_image: string;
   metacritic: number;
   description?: string;
@@ -33,6 +27,7 @@ export default function CardContainer(props: CardContainerProps) {
   const { searchQuery } = props;
   const [data, setData] = useState<GameData[]>([]);
   const [active, setActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentId, setCurrentId] = useState<number>();
   const [currentGame, setCurrentGame] = useState<LargeCardProps>();
 
@@ -42,8 +37,10 @@ export default function CardContainer(props: CardContainerProps) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       setData(await getRawGamesData(searchQuery));
+      setIsLoading(false);
     };
 
     fetchData();
@@ -92,7 +89,10 @@ export default function CardContainer(props: CardContainerProps) {
 
   return (
     <>
-      <section className="cards-container">{cards.length > 0 ? cards : <Spinner />}</section>
+      <section className="cards-container">
+        {!isLoading && !cards.length && <p className="cards_empty">No items found</p>}
+        {isLoading ? <Spinner /> : cards}
+      </section>
       <Modal
         active={active}
         setActive={setActive}

@@ -88,3 +88,8 @@
 
   color: rgba(0, 0, 0, 0.35);
 }
+
+.cards_empty {
+  font-size: large;
+  font-weight: bold;
+}
