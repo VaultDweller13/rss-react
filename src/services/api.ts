@@ -2,6 +2,7 @@ const API_KEY = '5fbcc2bba65e461196bc166ce8c8c946';
 const endpoint = 'https://api.rawg.io/api/games';
 
 type QueryParams = Record<string, string>;
+type RawGameData = { results: [] };
 
 enum Platforms {
   PC = '1',
@@ -17,20 +18,37 @@ async function getRawGamesData(search = '') {
     key: API_KEY,
   };
 
-  return (await fetchData('', params)).results;
+  const { error, data } = await fetchData('', params);
+
+  return { error, data: (data as RawGameData).results || [] };
 }
 
-function getDataById(id: number) {
-  return fetchData(`/${id}`, {
+async function getDataById(id: number) {
+  const { error, data } = await fetchData(`/${id}`, {
     key: API_KEY,
   });
+
+  return { error, data };
 }
 
 async function fetchData(path: string, params: QueryParams) {
   const url = createUrl(endpoint, path, params);
-  const response = await fetch(url, { mode: 'cors' });
+  const result: { error: string; data: unknown } = {
+    error: '',
+    data: [],
+  };
 
-  return response.json();
+  try {
+    const response = await fetch(url, { mode: 'cors' });
+
+    if (!response.ok) throw Error('Could not fetch data from server');
+
+    result.data = await response.json();
+  } catch (e) {
+    if (e instanceof Error) result.error = e.message;
+  }
+
+  return result;
 }
 
 function createUrl(url: string, path?: string, params?: QueryParams) {

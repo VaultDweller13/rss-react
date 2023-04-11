@@ -26,6 +26,7 @@ type CardContainerProps = {
 export default function CardContainer(props: CardContainerProps) {
   const { searchQuery } = props;
   const [data, setData] = useState<GameData[]>([]);
+  const [error, setError] = useState('');
   const [active, setActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentId, setCurrentId] = useState<number>();
@@ -39,7 +40,9 @@ export default function CardContainer(props: CardContainerProps) {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      setData(await getRawGamesData(searchQuery));
+      const { error, data } = await getRawGamesData(searchQuery);
+      setError(error);
+      setData(data);
       setIsLoading(false);
     };
 
@@ -50,8 +53,10 @@ export default function CardContainer(props: CardContainerProps) {
     if (!currentId) return;
 
     const fetchData = async () => {
-      const gameData = (await getDataById(currentId)) as GameData;
+      const { error, data } = await getDataById(currentId);
+      const gameData = data as GameData;
 
+      setError(error);
       setCurrentGame({
         id: gameData.id,
         title: gameData.name,
@@ -87,10 +92,12 @@ export default function CardContainer(props: CardContainerProps) {
     <Card key={game.id} {...game} img={game.img} onClick={handleClick} />
   ));
 
+  const isEmpty = !isLoading && !cards.length && !error;
   return (
     <>
       <section className="cards-container">
-        {!isLoading && !cards.length && <p className="cards_empty">No items found</p>}
+        {isEmpty && <p className="cards_empty">No items found</p>}
+        {error && <p className="cards_empty">{error}</p>}
         {isLoading ? <Spinner /> : cards}
       </section>
       <Modal
