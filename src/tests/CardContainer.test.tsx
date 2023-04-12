@@ -24,3 +24,19 @@ describe('CardContainer', () => {
     expect(modal).toBeInTheDocument;
   });
 });
+
+describe('Modal', () => {
+  it('should close, when "x" icon pressed', async () => {
+    render(<CardContainer searchQuery="" />);
+
+    const card = await screen.findByText('Fire Emblem: Three Houses');
+    fireEvent.click(card);
+
+    const modal = await screen.findByTestId('modal');
+    const closeButton = screen.getByAltText('Close modal button');
+
+    fireEvent.click(closeButton);
+
+    expect(modal).not.toHaveClass('active');
+  });
+});
