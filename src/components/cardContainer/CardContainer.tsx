@@ -1,8 +1,10 @@
-import { Card } from './Card';
-import { CardLarge, LargeCardProps } from './CardLarge';
-import { Modal, Spinner } from '../';
-import { getRawGamesData, getDataById } from '../../services/api';
 import { useEffect, useState } from 'react';
+
+import { Card } from '../';
+import { CardLarge, LargeCardProps } from '../card';
+import { Modal, Spinner } from '..';
+import { getRawGamesData, getDataById } from '../../services/api';
+import styles from './CardContainer.module.css';
 
 type FetchedName = {
   name: string;
@@ -95,9 +97,9 @@ export default function CardContainer(props: CardContainerProps) {
   const isEmpty = !isLoading && !cards.length && !error;
   return (
     <>
-      <section className="cards-container">
-        {isEmpty && <p className="cards_empty">No items found</p>}
-        {error && <p className="cards_empty">{error}</p>}
+      <section className={styles.container}>
+        {isEmpty && <p className={styles.empty}>No items found</p>}
+        {error && <p className={styles.empty}>{error}</p>}
         {isLoading ? <Spinner /> : cards}
       </section>
       <Modal

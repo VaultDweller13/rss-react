@@ -39,14 +39,6 @@ body {
   text-decoration: underline;
 }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-
-  padding: 20px 0;
-}
-
 .not-found {
   font-size: 128px;
   text-align: center;

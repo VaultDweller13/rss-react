@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import './SearchBar.css';
+import styles from './SearchBar.module.css';
 import { search_icon } from '../../assets/';
 
 type SearchBarProps = {
@@ -34,15 +34,15 @@ export default function SearchBar(props: SearchBarProps) {
   };
 
   return (
-    <div className="search-bar">
-      <form className="search_form">
-        <input type="search" className="search_input" placeholder="Search" ref={inputRef} />
+    <div className={styles.container}>
+      <form className={styles.form}>
+        <input type="search" className={styles.input} placeholder="Search" ref={inputRef} />
         <button
           type="submit"
-          className="search_button"
+          className={styles.button}
           onClick={(e: React.MouseEvent) => handleClick(e)}
         >
-          <img src={search_icon} alt="Search icon" className="search_icon" />
+          <img src={search_icon} alt="Search icon" className={styles.icon} />
         </button>
       </form>
     </div>

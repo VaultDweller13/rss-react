@@ -1,4 +1,4 @@
-import './Modal.css';
+import styles from './Modal.module.css';
 import icon_close from '../../assets/img/close.svg';
 
 type ModalProps = {
@@ -10,16 +10,16 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   return (
     <div
-      className={props.active ? 'modal active' : 'modal'}
+      className={props.active ? `${styles.modal} ${styles.active}` : styles.modal}
       onClick={() => props.setActive(false)}
       data-testid="modal"
     >
       <div
-        className={props.active ? 'modal_content active' : 'modal_content'}
+        className={props.active ? `${styles.content} ${styles.active}` : styles.content}
         onClick={(e) => e.stopPropagation()}
       >
         <img
-          className="modal_close"
+          className={styles.closeIcon}
           src={icon_close}
           alt="Close modal button"
           onClick={() => props.setActive(false)}
