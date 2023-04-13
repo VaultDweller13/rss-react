@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import { Home, NotFound, About, FormPage } from './pages';
+import { Home, NotFound, About, FormPage } from '../pages';
 
 export default function App() {
   return (

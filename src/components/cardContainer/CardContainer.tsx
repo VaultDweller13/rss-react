@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
 
 import { Card } from '../';
 import { CardLarge, LargeCardProps } from '../card';
@@ -6,12 +7,8 @@ import { Modal, Spinner } from '..';
 import { getRawGamesData, getDataById, type GameData } from '../../services/api';
 import styles from './CardContainer.module.css';
 
-type CardContainerProps = {
-  searchQuery: string;
-};
-
-export default function CardContainer(props: CardContainerProps) {
-  const { searchQuery } = props;
+export default function CardContainer() {
+  const searchQuery = useAppSelector((state) => state.search);
 
   const [data, setData] = useState<GameData[]>([]);
   const [error, setError] = useState('');
