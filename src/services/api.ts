@@ -3,6 +3,21 @@ const endpoint = 'https://api.rawg.io/api/games';
 
 type QueryParams = Record<string, string>;
 type RawGameData = { results: [] };
+type BaseEntity = {
+  id: number;
+  name: string;
+};
+
+type GameData = {
+  id: number;
+  name: string;
+  released: string;
+  parent_platforms: Record<'platform', BaseEntity>[];
+  genres: BaseEntity[];
+  background_image: string;
+  metacritic: number;
+  description?: string;
+};
 
 enum Platforms {
   PC = '1',
@@ -20,7 +35,7 @@ async function getRawGamesData(search = '') {
 
   const { error, data } = await fetchData('', params);
 
-  return { error, data: (data as RawGameData).results || [] };
+  return { error, data: ((data as RawGameData).results || []) as GameData[] };
 }
 
 async function getDataById(id: number) {
@@ -28,7 +43,7 @@ async function getDataById(id: number) {
     key: API_KEY,
   });
 
-  return { error, data };
+  return { error, data: data as GameData };
 }
 
 async function fetchData(path: string, params: QueryParams) {
@@ -63,4 +78,4 @@ function createUrl(url: string, path?: string, params?: QueryParams) {
   return `${url}${path}?${query}`;
 }
 
-export { getRawGamesData, getDataById };
+export { getRawGamesData, getDataById, type GameData };

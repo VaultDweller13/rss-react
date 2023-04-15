@@ -3,23 +3,8 @@ import { useEffect, useState } from 'react';
 import { Card } from '../';
 import { CardLarge, LargeCardProps } from '../card';
 import { Modal, Spinner } from '..';
-import { getRawGamesData, getDataById } from '../../services/api';
+import { getRawGamesData, getDataById, type GameData } from '../../services/api';
 import styles from './CardContainer.module.css';
-
-type FetchedName = {
-  name: string;
-};
-
-type GameData = {
-  id: number;
-  name: string;
-  released: string;
-  parent_platforms: Record<'platform', FetchedName>[];
-  genres: FetchedName[];
-  background_image: string;
-  metacritic: number;
-  description?: string;
-};
 
 type CardContainerProps = {
   searchQuery: string;
@@ -27,6 +12,7 @@ type CardContainerProps = {
 
 export default function CardContainer(props: CardContainerProps) {
   const { searchQuery } = props;
+
   const [data, setData] = useState<GameData[]>([]);
   const [error, setError] = useState('');
   const [active, setActive] = useState(false);
@@ -37,6 +23,23 @@ export default function CardContainer(props: CardContainerProps) {
   const handleClick = (id: number) => {
     setActive(true);
     setCurrentId(id);
+  };
+
+  const getGameObject = (data: GameData) => {
+    if (!data.id) return;
+
+    return {
+      id: data.id,
+      title: data.name,
+      date: data.released,
+      platform: 'switch',
+      genres: data.genres.map((genre) => genre.name),
+      format: 'digital' as const,
+      img: data.background_image,
+      price: '59.99',
+      score: data.metacritic,
+      description: data.description || '',
+    };
   };
 
   useEffect(() => {
@@ -56,21 +59,9 @@ export default function CardContainer(props: CardContainerProps) {
 
     const fetchData = async () => {
       const { error, data } = await getDataById(currentId);
-      const gameData = data as GameData;
 
       setError(error);
-      setCurrentGame({
-        id: gameData.id,
-        title: gameData.name,
-        date: gameData.released,
-        platform: 'switch',
-        genres: gameData.genres.map((genre) => genre.name),
-        format: 'digital' as const,
-        img: gameData.background_image,
-        price: '59.99',
-        score: gameData.metacritic,
-        description: gameData.description || '',
-      });
+      setCurrentGame(getGameObject(data));
     };
 
     fetchData();
@@ -78,23 +69,11 @@ export default function CardContainer(props: CardContainerProps) {
     return () => setCurrentGame(undefined);
   }, [currentId]);
 
-  const gamesArray = data.map((game) => ({
-    id: game.id,
-    title: game.name,
-    date: game.released,
-    platform: 'switch',
-    genres: game.genres.map((genre) => genre.name),
-    format: 'digital' as const,
-    img: game.background_image,
-    price: '59.99',
-    score: game.metacritic,
-  }));
-
-  const cards = gamesArray.map((game) => (
-    <Card key={game.id} {...game} img={game.img} onClick={handleClick} />
-  ));
-
+  const cards = data
+    .map(getGameObject)
+    .map((game) => game && <Card key={game.id} {...game} onClick={handleClick} />);
   const isEmpty = !isLoading && !cards.length && !error;
+
   return (
     <>
       <section className={styles.container}>
