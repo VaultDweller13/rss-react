@@ -1,4 +1,4 @@
-export { Card } from './card/card/Card';
+export { Card, type CardProps } from './card/card/Card';
 export { CardLarge } from './card/cardLarge/CardLarge';
 export { default as CardContainer } from './cardContainer/CardContainer';
 export { default as Modal } from './modal/Modal';

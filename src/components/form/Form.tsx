@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Select, Card } from '../';
+import { Select, Card, type CardProps } from '../';
 import { genres } from '../../assets';
 import styles from './Form.module.css';
 
@@ -10,13 +10,13 @@ type Inputs = {
   date: string;
   platform: string;
   genres: string[];
-  format: 'digital' | 'physical';
+  format: CardProps['format'];
   image: FileList;
 };
 
 export default function Form() {
   const form = React.createRef<HTMLFormElement>();
-  const [cards, setCards] = useState<JSX.Element[]>([]);
+  const [cardsData, setCardsData] = useState<CardProps[]>([]);
   const {
     register,
     handleSubmit,
@@ -41,11 +41,13 @@ export default function Form() {
       price: '59.99',
       score: null,
       onClick: () => {},
-      id: cards.length + 1,
+      id: cardsData.length + 1,
     };
 
-    setCards((prevState) => [...prevState, <Card key={props.id} {...props} />]);
+    setCardsData((prevState) => [...prevState, props]);
   };
+
+  const cards = cardsData.map((props) => <Card key={props.id} {...props} />);
 
   return (
     <main className={styles.wrapper}>
