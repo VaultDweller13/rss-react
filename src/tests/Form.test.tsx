@@ -1,10 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../app/store';
 
 import Form from '../components/form/Form';
 
 describe('Form', () => {
   it('should have title, date', () => {
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
 
     fireEvent.change(screen.getByLabelText('Game Title:'), { target: { value: 'Fallout 2' } });
     fireEvent.change(screen.getByLabelText('Release Date:'), { target: { value: '1998-10-29' } });
@@ -20,7 +26,11 @@ describe('Form', () => {
 
 describe('Input type="file"', () => {
   it('should upload 1 file', () => {
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
     const input = screen.getByLabelText('Cover Image') as HTMLInputElement;
 
     fireEvent.change(screen.getByLabelText('Cover Image'), {
