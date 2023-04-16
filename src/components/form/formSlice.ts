@@ -1,13 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { CardProps } from '../';
 
-const initialState: CardProps[] = [];
+type CustomCardProps = Omit<CardProps, 'onClick'>;
+const initialState: CustomCardProps[] = [];
 
 export const formSlice = createSlice({
   name: 'formSlice',
   initialState,
   reducers: {
-    storeCard: (state, action: PayloadAction<CardProps>) => {
+    storeCard: (state, action: PayloadAction<CustomCardProps>) => {
       state.push(action.payload);
     },
   },

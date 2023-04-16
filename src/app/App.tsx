@@ -1,8 +1,18 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { Home, NotFound, About, FormPage } from '../pages';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { fetchGamesData } from '../components/cardContainer/gameDataSlice';
 
 export default function App() {
+  const searchQuery = useAppSelector((state) => state.search);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGamesData(searchQuery));
+  });
+
   return (
     <BrowserRouter>
       <Routes>

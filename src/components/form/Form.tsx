@@ -45,14 +45,13 @@ export default function Form() {
       img: URL.createObjectURL(data.image[0]),
       price: '59.99',
       score: null,
-      onClick: () => {},
       id: cardsData.length + 1,
     };
 
     dispatch(storeCard(props));
   };
 
-  const cards = cardsData.map((props) => <Card key={props.id} {...props} />);
+  const cards = cardsData.map((props) => <Card key={props.id} {...props} onClick={() => {}} />);
 
   return (
     <main className={styles.wrapper}>

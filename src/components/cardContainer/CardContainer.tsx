@@ -5,13 +5,12 @@ import { Card } from '../';
 import { CardLarge } from '../card';
 import { Modal, Spinner } from '..';
 import { type GameData } from '../../services/api';
-import { fetchDataById, fetchGamesData, clearCurrentGame } from './gameDataSlice';
+import { fetchDataById, clearCurrentGame } from './gameDataSlice';
 import styles from './CardContainer.module.css';
 
 export default function CardContainer() {
   const dispatch = useAppDispatch();
 
-  const searchQuery = useAppSelector((state) => state.search);
   const data = useAppSelector((state) => state.gameData.fetchedGames);
   const currentGameData = useAppSelector((state) => state.gameData.fetchedById);
   const error = useAppSelector((state) => state.gameData.error);
@@ -41,10 +40,6 @@ export default function CardContainer() {
       description: data.description || '',
     };
   };
-
-  useEffect(() => {
-    dispatch(fetchGamesData(searchQuery));
-  }, [dispatch, searchQuery]);
 
   useEffect(() => {
     if (!currentId) return;

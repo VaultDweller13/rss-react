@@ -1,15 +1,20 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { fetchGamesData } from '../components/cardContainer/gameDataSlice';
 
 import store from '../app/store';
 
-import { CardContainer } from '../components';
+import App from '../app/App';
 
-describe('CardContainer', () => {
+const searchQuery = store.getState().search;
+
+store.dispatch(fetchGamesData(searchQuery));
+
+describe('App', () => {
   it('should render <Card> elements', async () => {
     render(
       <Provider store={store}>
-        <CardContainer />
+        <App />
       </Provider>
     );
 
@@ -18,11 +23,11 @@ describe('CardContainer', () => {
   });
 });
 
-describe('CardContainer', () => {
+describe('App', () => {
   it('should render modal window on card click', async () => {
     render(
       <Provider store={store}>
-        <CardContainer />
+        <App />
       </Provider>
     );
     const card = await screen.findByText('Fire Emblem: Three Houses');
@@ -40,7 +45,7 @@ describe('Modal', () => {
   it('should close, when "x" icon pressed', async () => {
     render(
       <Provider store={store}>
-        <CardContainer />
+        <App />
       </Provider>
     );
 
