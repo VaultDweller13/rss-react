@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { Card } from '../';
-import { CardLarge, LargeCardProps } from '../card';
+import { CardLarge } from '../card';
 import { Modal, Spinner } from '..';
-import { getRawGamesData, getDataById, type GameData } from '../../services/api';
+import { type GameData } from '../../services/api';
+import { fetchDataById, fetchGamesData, clearCurrentGame } from './gameDataSlice';
 import styles from './CardContainer.module.css';
 
 export default function CardContainer() {
-  const searchQuery = useAppSelector((state) => state.search);
+  const dispatch = useAppDispatch();
 
-  const [data, setData] = useState<GameData[]>([]);
-  const [error, setError] = useState('');
+  const searchQuery = useAppSelector((state) => state.search);
+  const data = useAppSelector((state) => state.gameData.fetchedGames);
+  const currentGameData = useAppSelector((state) => state.gameData.fetchedById);
+  const error = useAppSelector((state) => state.gameData.error);
+
   const [active, setActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentId, setCurrentId] = useState<number>();
-  const [currentGame, setCurrentGame] = useState<LargeCardProps>();
 
   const handleClick = (id: number) => {
     setActive(true);
@@ -40,35 +43,23 @@ export default function CardContainer() {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    const fetchData = async () => {
-      const { error, data } = await getRawGamesData(searchQuery);
-      setError(error);
-      setData(data);
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, [searchQuery]);
+    dispatch(fetchGamesData(searchQuery));
+  }, [dispatch, searchQuery]);
 
   useEffect(() => {
     if (!currentId) return;
 
-    const fetchData = async () => {
-      const { error, data } = await getDataById(currentId);
+    dispatch(fetchDataById(currentId));
 
-      setError(error);
-      setCurrentGame(getGameObject(data));
+    return () => {
+      dispatch(clearCurrentGame());
     };
-
-    fetchData();
-
-    return () => setCurrentGame(undefined);
-  }, [currentId]);
+  }, [dispatch, currentId]);
 
   const cards = data
     .map(getGameObject)
     .map((game) => game && <Card key={game.id} {...game} onClick={handleClick} />);
+  const currentGame = currentGameData && getGameObject(currentGameData);
   const isEmpty = !isLoading && !cards.length && !error;
 
   return (

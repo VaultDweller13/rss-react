@@ -1,14 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState: '',
   reducers: {
-    save: (_, action) => action.payload,
-    clear: () => '',
+    save: (_, action: PayloadAction<string>) => action.payload,
   },
 });
 
-export const { save, clear } = searchSlice.actions;
+export const { save } = searchSlice.actions;
 
 export default searchSlice.reducer;

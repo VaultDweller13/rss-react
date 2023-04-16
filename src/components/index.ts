@@ -8,4 +8,9 @@ export { default as Select } from './form/Select';
 export { default as Header } from './header/Header';
 export { default as SearchBar } from './searchBar/SearchBar';
 export { default as Spinner } from './spinner/Spinner';
-export { default as searchReducer, save, clear, searchSlice } from './searchBar/searchSlice';
+export { default as searchReducer, save, searchSlice } from './searchBar/searchSlice';
+export {
+  default as gameDataReducer,
+  storeGames,
+  gameDataSlice,
+} from './cardContainer/gameDataSlice';
