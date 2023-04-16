@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { searchReducer, gameDataReducer } from '../components/';
+import { searchReducer, gameDataReducer, formReducer } from '../components/';
 
 const store = configureStore({
   reducer: {
     search: searchReducer,
     gameData: gameDataReducer,
+    userCards: formReducer,
   },
 });
 

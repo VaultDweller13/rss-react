@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Select, Card, type CardProps } from '../';
 import { genres } from '../../assets';
 import styles from './Form.module.css';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { storeCard } from './formSlice';
 
 type Inputs = {
   title: string;
@@ -15,8 +17,11 @@ type Inputs = {
 };
 
 export default function Form() {
+  const dispatch = useAppDispatch();
+
   const form = React.createRef<HTMLFormElement>();
-  const [cardsData, setCardsData] = useState<CardProps[]>([]);
+  const cardsData = useAppSelector((state) => state.userCards);
+
   const {
     register,
     handleSubmit,
@@ -44,7 +49,7 @@ export default function Form() {
       id: cardsData.length + 1,
     };
 
-    setCardsData((prevState) => [...prevState, props]);
+    dispatch(storeCard(props));
   };
 
   const cards = cardsData.map((props) => <Card key={props.id} {...props} />);

@@ -14,3 +14,4 @@ export {
   storeGames,
   gameDataSlice,
 } from './cardContainer/gameDataSlice';
+export { default as formReducer, storeCard } from './form/formSlice';
