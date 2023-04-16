@@ -15,9 +15,10 @@ export default function CardContainer() {
   const data = useAppSelector((state) => state.gameData.fetchedGames);
   const currentGameData = useAppSelector((state) => state.gameData.fetchedById);
   const error = useAppSelector((state) => state.gameData.error);
+  const status = useAppSelector((state) => state.gameData.status);
 
   const [active, setActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [currentId, setCurrentId] = useState<number>();
 
   const handleClick = (id: number) => {
@@ -60,7 +61,8 @@ export default function CardContainer() {
     .map(getGameObject)
     .map((game) => game && <Card key={game.id} {...game} onClick={handleClick} />);
   const currentGame = currentGameData && getGameObject(currentGameData);
-  const isEmpty = !isLoading && !cards.length && !error;
+  const isEmpty = status === 'succeeded' && !cards.length && !error;
+  const isLoading = status === 'pending';
 
   return (
     <>
