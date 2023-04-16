@@ -18,7 +18,6 @@ export default function CardContainer() {
   const status = useAppSelector((state) => state.gameData.status);
 
   const [active, setActive] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
   const [currentId, setCurrentId] = useState<number>();
 
   const handleClick = (id: number) => {
