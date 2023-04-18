@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { CardButtons, Genres } from '../';
 import { metacritic_icon } from '../../../assets';
 import styles from './Card.module.css';
@@ -22,6 +23,8 @@ export function Card(props: CardProps) {
     day: 'numeric',
   });
 
+  const scoreValue = classNames(styles.scoreValue, getScoreColorClass(props.score));
+
   return (
     <div className={styles.card} onClick={() => props.onClick(props.id)}>
       <img className={styles.image} src={props.img} alt="Game cover" />
@@ -33,9 +36,7 @@ export function Card(props: CardProps) {
       </div>
       <div className={styles.score}>
         <img className={styles.scoreIcon} src={metacritic_icon} />
-        <span className={`${styles.scoreValue} ${getScoreColorClass(props.score)}`}>
-          {props.score || 'N/A'}
-        </span>
+        <span className={scoreValue}>{props.score || 'N/A'}</span>
       </div>
       <CardButtons platform={props.platform} />
       <p className={styles.date}>Release date: {date}</p>

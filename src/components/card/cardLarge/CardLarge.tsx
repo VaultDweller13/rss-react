@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { metacritic_icon } from '../../../assets';
 import { CardButtons, Genres } from '../';
 
@@ -23,6 +24,8 @@ export function CardLarge(props: LargeCardProps) {
     day: 'numeric',
   });
 
+  const scoreValue = classNames(styles.scoreValue, getScoreColorClass(props.score));
+
   return (
     <>
       <div className={styles.card}>
@@ -35,9 +38,7 @@ export function CardLarge(props: LargeCardProps) {
         </div>
         <div className={styles.score}>
           <img className={styles.scoreIcon} src={metacritic_icon} />
-          <span className={`${styles.scoreValue} ${getScoreColorClass(props.score)}`}>
-            {props.score || 'N/A'}
-          </span>
+          <span className={scoreValue}>{props.score || 'N/A'}</span>
         </div>
         <CardButtons platform={props.platform} className={styles.buttons} />
         <p className={styles.date}>Release date: {date}</p>
