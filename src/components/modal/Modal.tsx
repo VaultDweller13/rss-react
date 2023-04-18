@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styles from './Modal.module.css';
 import icon_close from '../../assets/img/close.svg';
 
@@ -8,12 +9,10 @@ type ModalProps = {
 };
 
 export default function Modal(props: ModalProps) {
+  const modalClass = classNames(styles.modal, { [styles.active]: props.active });
+
   return (
-    <div
-      className={props.active ? `${styles.modal} ${styles.active}` : styles.modal}
-      onClick={() => props.setActive(false)}
-      data-testid="modal"
-    >
+    <div className={modalClass} onClick={() => props.setActive(false)} data-testid="modal">
       <div
         className={props.active ? `${styles.content} ${styles.active}` : styles.content}
         onClick={(e) => e.stopPropagation()}
