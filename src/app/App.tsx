@@ -1,7 +1,7 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { Home, NotFound, About, FormPage } from '../pages';
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { fetchGamesData } from '../components/cardContainer/gameDataSlice';
 
