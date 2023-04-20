@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import styles from './CardButtons.module.css';
 import { favorite_empty, favorite_filled } from '../../../assets';
@@ -15,8 +16,10 @@ export default function CardButtons(props: CardButtonsProps) {
     setFavorite(!isFavorite);
   };
 
+  const containerClass = classNames(styles.container, props.className);
+
   return (
-    <div className={`${styles.container} ${props.className || ''}`}>
+    <div className={containerClass}>
       <button type="button" className={styles.cartButton}>
         Add to Cart
       </button>

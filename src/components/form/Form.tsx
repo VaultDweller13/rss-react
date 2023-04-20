@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import classNames from 'classnames';
 
 import { Select, Card, type CardProps } from '../';
 import { genres } from '../../assets';
@@ -53,6 +54,9 @@ export default function Form() {
 
   const cards = cardsData.map((props) => <Card key={props.id} {...props} onClick={() => {}} />);
 
+  const checkboxClass = classNames(styles.label, styles.checkboxLabel);
+  const fileInputClass = classNames(styles.input, styles.fileInput);
+
   return (
     <main className={styles.wrapper}>
       <form className={styles.form} aria-label="Add a game form" ref={form} onSubmit={onSubmit}>
@@ -89,7 +93,7 @@ export default function Form() {
             <h3 className={styles.label}>Genres:</h3>
             <div className={styles.checkboxContainer}>
               {genres.map((genre) => (
-                <label key={genre.id} className={`${styles.label} ${styles.checkboxLabel}`}>
+                <label key={genre.id} className={checkboxClass}>
                   <input
                     type="checkbox"
                     id={genre.genre}
@@ -105,7 +109,7 @@ export default function Form() {
           <li className={styles.item}>
             <h3 className={styles.label}>Format:</h3>
             <div className={styles.radioContainer}>
-              <label className={`${styles.label} ${styles.checkboxLabel}`}>
+              <label className={checkboxClass}>
                 <input
                   type="radio"
                   id="digital"
@@ -114,7 +118,7 @@ export default function Form() {
                 />
                 Digital
               </label>
-              <label className={`${styles.label} ${styles.checkboxLabel}`}>
+              <label className={checkboxClass}>
                 <input type="radio" id="physical" value="physical" {...register('format')} />
                 Physical
               </label>
@@ -129,7 +133,7 @@ export default function Form() {
               type="file"
               id="form_game-cover"
               accept="image/png, image/jpeg"
-              className={`${styles.input} ${styles.fileInput}`}
+              className={fileInputClass}
               {...register('image', { required: 'Please provide a cover image' })}
             />
             <p className={styles.validationMessage}>{errors.image?.message}</p>
