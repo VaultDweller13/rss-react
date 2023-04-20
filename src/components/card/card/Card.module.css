@@ -49,9 +49,6 @@
   color: rgba(0, 0, 0, 0.35);
 }
 
-.date {
+.dateContainer {
   grid-column: 1 / 3;
-  margin: 0;
-
-  color: rgba(0, 0, 0, 0.35);
 }

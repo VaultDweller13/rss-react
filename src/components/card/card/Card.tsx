@@ -1,4 +1,4 @@
-import { CardButtons, Genres, Score } from '../';
+import { CardButtons, Genres, Score, ReleaseDate } from '../';
 import styles from './Card.module.css';
 
 export type CardProps = {
@@ -15,12 +15,6 @@ export type CardProps = {
 };
 
 export function Card(props: CardProps) {
-  const date = new Date(props.date).toLocaleString('en-GB', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   return (
     <div className={styles.card} onClick={() => props.onClick(props.id)}>
       <img className={styles.image} src={props.img} alt="Game cover" />
@@ -32,7 +26,9 @@ export function Card(props: CardProps) {
       </div>
       <Score value={props.score} />
       <CardButtons platform={props.platform} />
-      <p className={styles.date}>Release date: {date}</p>
+      <div className={styles.dateContainer}>
+        <ReleaseDate date={props.date} />
+      </div>
     </div>
   );
 }

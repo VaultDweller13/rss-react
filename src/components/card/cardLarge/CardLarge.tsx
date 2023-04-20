@@ -1,4 +1,4 @@
-import { CardButtons, Genres, Score } from '../';
+import { CardButtons, Genres, Score, ReleaseDate } from '../';
 import styles from './CardLarge.module.css';
 
 export type LargeCardProps = {
@@ -15,12 +15,6 @@ export type LargeCardProps = {
 };
 
 export function CardLarge(props: LargeCardProps) {
-  const date = new Date(props.date).toLocaleString('en-GB', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   return (
     <div className={styles.card}>
       <h3 className={styles.title}>{props.title}</h3>
@@ -34,7 +28,7 @@ export function CardLarge(props: LargeCardProps) {
         <Score value={props.score} />
       </div>
       <CardButtons platform={props.platform} className={styles.buttons} />
-      <p className={styles.date}>Release date: {date}</p>
+      <ReleaseDate date={props.date} />
       <p className={styles.description} dangerouslySetInnerHTML={{ __html: props.description }} />
     </div>
   );
