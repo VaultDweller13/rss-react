@@ -1,15 +1,9 @@
 import { UseFormRegister } from 'react-hook-form';
+import { Inputs } from './Form';
 import styles from './Form.module.css';
 
 type SelectProps = {
-  register: UseFormRegister<{
-    title: string;
-    date: string;
-    platform: string;
-    genres: string[];
-    format: 'digital' | 'physical';
-    image: FileList;
-  }>;
+  register: UseFormRegister<Inputs>;
 };
 
 export default function Select(props: SelectProps) {
