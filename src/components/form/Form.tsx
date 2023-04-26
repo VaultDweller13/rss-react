@@ -8,6 +8,7 @@ import styles from './Form.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { storeCard } from './formSlice';
 import { Title } from './Title';
+import { DateInput } from './DateInput';
 
 export type Inputs = {
   title: string;
@@ -67,15 +68,7 @@ export default function Form() {
             <p className={styles.validationMessage}>{errors.title?.message}</p>
           </li>
           <li className={styles.item}>
-            <label className={styles.label} htmlFor="form_game-date">
-              Release Date:
-            </label>
-            <input
-              type="date"
-              id="form_game-date"
-              className={styles.input}
-              {...register('date', { validate: dateInputIsValid })}
-            />
+            <DateInput register={register} />
             <p className={styles.validationMessage}>{errors.date?.message}</p>
           </li>
           <li className={styles.item}>
@@ -139,12 +132,4 @@ export default function Form() {
       {cards}
     </main>
   );
-}
-
-function dateInputIsValid(value: string | null) {
-  const message = 'The first game ever was made in the 1950';
-
-  if (!value) return message;
-
-  return new Date('1950') < new Date(value) || message;
 }

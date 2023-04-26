@@ -13,10 +13,10 @@ export function Title({ register }: InputProps) {
         Game title:
       </label>
       <input
-        {...register('title', { required: "You must provide the game's title" })}
         type="text"
         id="form_game-title"
         className={styles.input}
+        {...register('title', { required: "You must provide the game's title" })}
       />
     </>
   );
