@@ -2,13 +2,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 
-import { Select, Card, type CardProps } from '../';
-import { genres } from '../../assets';
+import { Select, DateInput, Format, Genres, Title } from './';
+import { Card, type CardProps } from '../';
 import styles from './Form.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { storeCard } from './formSlice';
-import { Title } from './Title';
-import { DateInput } from './DateInput';
 
 export type Inputs = {
   title: string;
@@ -56,7 +54,6 @@ export default function Form() {
 
   const cards = cardsData.map((props) => <Card key={props.id} {...props} onClick={() => {}} />);
 
-  const checkboxClass = classNames(styles.label, styles.checkboxLabel);
   const fileInputClass = classNames(styles.input, styles.fileInput);
 
   return (
@@ -76,39 +73,11 @@ export default function Form() {
             <p className={styles.validationMessage}>{errors.platform?.message}</p>
           </li>
           <li className={styles.item}>
-            <h3 className={styles.label}>Genres:</h3>
-            <div className={styles.checkboxContainer}>
-              {genres.map((genre) => (
-                <label key={genre.id} className={checkboxClass}>
-                  <input
-                    type="checkbox"
-                    id={genre.genre}
-                    value={genre.label}
-                    {...register('genres', { required: 'Please specify at least 1 genre' })}
-                  />
-                  {genre.label}
-                </label>
-              ))}
-            </div>
+            <Genres register={register} />
             <p className={styles.validationMessage}>{errors.genres?.message}</p>
           </li>
           <li className={styles.item}>
-            <h3 className={styles.label}>Format:</h3>
-            <div className={styles.radioContainer}>
-              <label className={checkboxClass}>
-                <input
-                  type="radio"
-                  id="digital"
-                  value="digital"
-                  {...register('format', { required: "Please specify the game's format" })}
-                />
-                Digital
-              </label>
-              <label className={checkboxClass}>
-                <input type="radio" id="physical" value="physical" {...register('format')} />
-                Physical
-              </label>
-            </div>
+            <Format register={register} />
             <p className={styles.validationMessage}>{errors.format?.message}</p>
           </li>
           <li className={styles.item}>

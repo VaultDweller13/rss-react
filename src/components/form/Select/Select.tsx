@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
-import { Inputs } from './Form';
-import styles from './Form.module.css';
+import { type Inputs } from '../Form';
+import styles from '../Form.module.css';
 
 type SelectProps = {
   register: UseFormRegister<Inputs>;

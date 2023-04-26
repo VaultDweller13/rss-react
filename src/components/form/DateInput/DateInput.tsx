@@ -1,12 +1,12 @@
 import { UseFormRegister } from 'react-hook-form';
-import { type Inputs } from './Form';
-import styles from './Form.module.css';
+import { type Inputs } from '../Form';
+import styles from '../Form.module.css';
 
 type InputProps = {
   register: UseFormRegister<Inputs>;
 };
 
-export function DateInput({ register }: InputProps) {
+export default function DateInput({ register }: InputProps) {
   return (
     <>
       <label className={styles.label} htmlFor="form_game-date">
