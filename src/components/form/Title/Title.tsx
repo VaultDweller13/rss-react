@@ -10,7 +10,7 @@ export default function Title({ register }: InputProps) {
   return (
     <>
       <label className={styles.label} htmlFor="form_game-title">
-        Game title:
+        Game Title:
       </label>
       <input
         type="text"
