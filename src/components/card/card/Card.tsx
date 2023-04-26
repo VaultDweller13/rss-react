@@ -1,6 +1,4 @@
-import classNames from 'classnames';
-import { CardButtons, Genres } from '../';
-import { metacritic_icon } from '../../../assets';
+import { CardButtons, Genres, Score, ReleaseDate } from '../';
 import styles from './Card.module.css';
 
 export type CardProps = {
@@ -12,19 +10,11 @@ export type CardProps = {
   format: 'digital' | 'physical';
   img: string;
   price: string;
-  score: number | null;
+  score: number | undefined;
   onClick: (id: number) => void;
 };
 
 export function Card(props: CardProps) {
-  const date = new Date(props.date).toLocaleString('en-GB', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
-  const scoreValue = classNames(styles.scoreValue, getScoreColorClass(props.score));
-
   return (
     <div className={styles.card} onClick={() => props.onClick(props.id)}>
       <img className={styles.image} src={props.img} alt="Game cover" />
@@ -34,20 +24,11 @@ export function Card(props: CardProps) {
         <p className={styles.price}>{props.price}</p>
         <p className={styles.format}>{props.format}</p>
       </div>
-      <div className={styles.score}>
-        <img className={styles.scoreIcon} src={metacritic_icon} />
-        <span className={scoreValue}>{props.score || 'N/A'}</span>
-      </div>
+      <Score value={props.score} />
       <CardButtons platform={props.platform} />
-      <p className={styles.date}>Release date: {date}</p>
+      <div className={styles.dateContainer}>
+        <ReleaseDate date={props.date} />
+      </div>
     </div>
   );
-}
-
-function getScoreColorClass(score: CardProps['score']) {
-  if (!score) return styles.scoreMissing;
-  if (score > 75) return styles.scoreHigh;
-  if (score > 50) return styles.scoreAverage;
-
-  return styles.scoreLow;
 }

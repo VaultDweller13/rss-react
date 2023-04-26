@@ -1,7 +1,4 @@
-import classNames from 'classnames';
-import { metacritic_icon } from '../../../assets';
-import { CardButtons, Genres } from '../';
-
+import { CardButtons, Genres, Score, ReleaseDate } from '../';
 import styles from './CardLarge.module.css';
 
 export type LargeCardProps = {
@@ -18,43 +15,21 @@ export type LargeCardProps = {
 };
 
 export function CardLarge(props: LargeCardProps) {
-  const date = new Date(props.date).toLocaleString('en-GB', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
-  const scoreValue = classNames(styles.scoreValue, getScoreColorClass(props.score));
-
   return (
-    <>
-      <div className={styles.card}>
-        <h3 className={styles.title}>{props.title}</h3>
-        <img className={styles.image} src={props.img} alt="Game cover" />
-        <Genres genres={props.genres} gridSpan="small" />
-        <div className={styles.purchase}>
-          <p className={styles.price}>{props.price}</p>
-          <p className={styles.format}>{props.format}</p>
+    <div className={styles.card}>
+      <h3 className={styles.title}>{props.title}</h3>
+      <img className={styles.image} src={props.img} alt="Game cover" />
+      <Genres genres={props.genres} gridSpan="small" />
+      <div className={styles.purchase}>
+        <div>
+          <span className={styles.price}>{props.price}</span>
+          <span className={styles.format}>{props.format}</span>
         </div>
-        <div className={styles.score}>
-          <img className={styles.scoreIcon} src={metacritic_icon} />
-          <span className={scoreValue}>{props.score || 'N/A'}</span>
-        </div>
-        <CardButtons platform={props.platform} className={styles.buttons} />
-        <p className={styles.date}>Release date: {date}</p>
-        <p
-          className={styles.description}
-          dangerouslySetInnerHTML={{ __html: props.description }}
-        ></p>
+        <Score value={props.score} />
       </div>
-    </>
+      <CardButtons platform={props.platform} className={styles.buttons} />
+      <ReleaseDate date={props.date} />
+      <p className={styles.description} dangerouslySetInnerHTML={{ __html: props.description }} />
+    </div>
   );
-
-  function getScoreColorClass(score: number) {
-    if (!score) return styles.scoreMissing;
-    if (score > 75) return styles.scoreHigh;
-    if (score > 50) return styles.scoreAverage;
-
-    return styles.scoreLow;
-  }
 }

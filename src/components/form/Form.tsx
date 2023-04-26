@@ -2,13 +2,13 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 
-import { Select, Card, type CardProps } from '../';
-import { genres } from '../../assets';
+import { Select, DateInput, Format, Genres, Title } from './';
+import { Card, type CardProps } from '../';
 import styles from './Form.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { storeCard } from './formSlice';
 
-type Inputs = {
+export type Inputs = {
   title: string;
   date: string;
   platform: string;
@@ -45,7 +45,7 @@ export default function Form() {
       format: data.format,
       img: URL.createObjectURL(data.image[0]),
       price: '59.99',
-      score: null,
+      score: undefined,
       id: cardsData.length + 1,
     };
 
@@ -54,7 +54,6 @@ export default function Form() {
 
   const cards = cardsData.map((props) => <Card key={props.id} {...props} onClick={() => {}} />);
 
-  const checkboxClass = classNames(styles.label, styles.checkboxLabel);
   const fileInputClass = classNames(styles.input, styles.fileInput);
 
   return (
@@ -62,27 +61,11 @@ export default function Form() {
       <form className={styles.form} aria-label="Add a game form" ref={form} onSubmit={onSubmit}>
         <ul className={styles.formContainer}>
           <li className={styles.item}>
-            <label className={styles.label} htmlFor="form_game-title">
-              Game Title:
-            </label>
-            <input
-              type="text"
-              id="form_game-title"
-              className={styles.input}
-              {...register('title', { required: "You must provide the game's title" })}
-            />
+            <Title register={register} />
             <p className={styles.validationMessage}>{errors.title?.message}</p>
           </li>
           <li className={styles.item}>
-            <label className={styles.label} htmlFor="form_game-date">
-              Release Date:
-            </label>
-            <input
-              type="date"
-              id="form_game-date"
-              className={styles.input}
-              {...register('date', { validate: dateInputIsValid })}
-            />
+            <DateInput register={register} />
             <p className={styles.validationMessage}>{errors.date?.message}</p>
           </li>
           <li className={styles.item}>
@@ -90,39 +73,11 @@ export default function Form() {
             <p className={styles.validationMessage}>{errors.platform?.message}</p>
           </li>
           <li className={styles.item}>
-            <h3 className={styles.label}>Genres:</h3>
-            <div className={styles.checkboxContainer}>
-              {genres.map((genre) => (
-                <label key={genre.id} className={checkboxClass}>
-                  <input
-                    type="checkbox"
-                    id={genre.genre}
-                    value={genre.label}
-                    {...register('genres', { required: 'Please specify at least 1 genre' })}
-                  />
-                  {genre.label}
-                </label>
-              ))}
-            </div>
+            <Genres register={register} />
             <p className={styles.validationMessage}>{errors.genres?.message}</p>
           </li>
           <li className={styles.item}>
-            <h3 className={styles.label}>Format:</h3>
-            <div className={styles.radioContainer}>
-              <label className={checkboxClass}>
-                <input
-                  type="radio"
-                  id="digital"
-                  value="digital"
-                  {...register('format', { required: "Please specify the game's format" })}
-                />
-                Digital
-              </label>
-              <label className={checkboxClass}>
-                <input type="radio" id="physical" value="physical" {...register('format')} />
-                Physical
-              </label>
-            </div>
+            <Format register={register} />
             <p className={styles.validationMessage}>{errors.format?.message}</p>
           </li>
           <li className={styles.item}>
@@ -146,12 +101,4 @@ export default function Form() {
       {cards}
     </main>
   );
-}
-
-function dateInputIsValid(value: string | null) {
-  const message = 'The first game ever was made in the 1950';
-
-  if (!value) return message;
-
-  return new Date('1950') < new Date(value) || message;
 }

@@ -65,11 +65,9 @@ export default function CardContainer() {
         {error && <p className={styles.empty}>{error}</p>}
         {isLoading ? <Spinner /> : cards}
       </section>
-      <Modal
-        active={active}
-        setActive={setActive}
-        child={(currentGame && <CardLarge {...currentGame} />) || <Spinner />}
-      />
+      <Modal active={active} setActive={setActive}>
+        {(currentGame && <CardLarge {...currentGame} />) || <Spinner />}
+      </Modal>
     </>
   );
 }
