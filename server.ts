@@ -12,15 +12,15 @@ async function createServer() {
 
   app.use(vite.middlewares);
 
-  app.use('*', async (req, res, next) => {
+  app.use('*', async (req, res /*next*/) => {
     const url = req.originalUrl;
 
     try {
-      const { render } = await vite.ssrLoadModule('/src/entry-server.jsx');
+      const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
       render(url, res);
     } catch (e) {
-      vite.ssrFixStacktrace(e);
-      next(e);
+      // vite.ssrFixStacktrace(e);
+      // next(e);
     }
   });
 
