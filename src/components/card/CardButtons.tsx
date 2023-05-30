@@ -1,32 +1,28 @@
-import React from 'react';
+import { useState } from 'react';
 
 import './CardButtons.css';
-import fav from '../../assets/img/favorite_empty.svg';
-import favFilled from '../../assets/img/favorite_filled.svg';
-import type { CardButtonsProps } from '../../utils/types';
+import { favorite_empty, favorite_filled } from '../../assets/';
 
-export default class CardButtons extends React.Component<CardButtonsProps> {
-  state = {
-    isFavorite: false,
+type CardButtonsProps = {
+  platform: string;
+};
+
+export default function CardButtons(props: CardButtonsProps) {
+  const [isFavorite, setFavorite] = useState(false);
+  const path = '../img/logo/';
+  const handleClick = () => {
+    setFavorite(!isFavorite);
   };
 
-  handleClick = () => {
-    this.setState({ isFavorite: !this.state.isFavorite });
-  };
-
-  render() {
-    const path = '../img/logo/';
-
-    return (
-      <div className="card_buttons">
-        <button type="button" className="button_main">
-          Add to Cart
-        </button>
-        <button type="button" className="button_wishlist" onClick={this.handleClick}>
-          <img className="wishlist-icon" src={this.state.isFavorite ? favFilled : fav} />
-        </button>
-        <img src={`${path}${this.props.platform}.svg`} className="card_logo" />
-      </div>
-    );
-  }
+  return (
+    <div className="card_buttons">
+      <button type="button" className="button_main">
+        Add to Cart
+      </button>
+      <button type="button" className="button_wishlist" onClick={handleClick}>
+        <img className="wishlist-icon" src={isFavorite ? favorite_filled : favorite_empty} />
+      </button>
+      <img src={`${path}${props.platform}.svg`} className="card_logo" />
+    </div>
+  );
 }

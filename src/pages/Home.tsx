@@ -1,18 +1,13 @@
-import SearchBar from '../components/searchBar/SearchBar';
-import React from 'react';
-import Header from '../components/Header';
-import CardContainer from '../components/CardContainer';
+import { SearchBar, Header, CardContainer } from '../components';
 
-export default class Home extends React.Component {
-  render() {
-    return (
-      <>
-        <Header currentPage="Switch store" />
-        <main className="wrapper">
-          <SearchBar />
-          <CardContainer />
-        </main>
-      </>
-    );
-  }
+export default function Home() {
+  return (
+    <>
+      <Header currentPage="Switch store" />
+      <main className="wrapper">
+        <SearchBar />
+        <CardContainer />
+      </main>
+    </>
+  );
 }

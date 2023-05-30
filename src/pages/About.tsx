@@ -1,15 +1,12 @@
-import React from 'react';
-import Header from '../components/Header';
+import { Header } from '../components';
 
-export default class Home extends React.Component {
-  render() {
-    return (
-      <>
-        <Header currentPage="About us" />
-        <main className="wrapper">
-          <h1>About page</h1>
-        </main>
-      </>
-    );
-  }
+export default function Home() {
+  return (
+    <>
+      <Header currentPage="About us" />
+      <main className="wrapper">
+        <h2>About page</h2>
+      </main>
+    </>
+  );
 }

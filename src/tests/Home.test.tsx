@@ -1,19 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Header from '../components/header/Header';
+import Home from '../pages/Home';
 
-const props = {
-  currentPage: 'Test page',
-};
-
-describe('Header', () => {
+describe('Home page', () => {
   it('should have title with current page name', () => {
     render(
       <BrowserRouter>
-        <Header {...props} />
+        <Home />
       </BrowserRouter>
     );
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Test page');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Switch store');
   });
 });

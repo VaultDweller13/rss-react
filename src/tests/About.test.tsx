@@ -1,19 +1,15 @@
+import About from '../pages/About';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Header from '../components/header/Header';
 
-const props = {
-  currentPage: 'Test page',
-};
-
-describe('Header', () => {
+describe('About', () => {
   it('should have title with current page name', () => {
     render(
       <BrowserRouter>
-        <Header {...props} />
+        <About />
       </BrowserRouter>
     );
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Test page');
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('About page');
   });
 });

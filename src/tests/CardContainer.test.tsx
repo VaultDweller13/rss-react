@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import CardContainer from '../components/CardContainer';
+import CardContainer from '../components/card/CardContainer';
 
 describe('CardContainer', () => {
   it('should render <Card> elements', () => {

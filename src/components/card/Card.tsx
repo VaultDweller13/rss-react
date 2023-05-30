@@ -1,52 +1,56 @@
-import React from 'react';
-
-import CardButtons from './CardButtons';
-import type { CardProps } from '../../utils/types';
+import { CardButtons } from '../';
+import { metacritic_icon } from '../../assets/';
 import './Card.css';
-import icon from '../../assets/img/metacritic-icon.svg';
 
-export default class Card extends React.Component<CardProps> {
-  render() {
-    const genres = this.props.genres.map((genre, index) => (
-      <span key={index} className="genres_item">
-        {genre}
-      </span>
-    ));
+type CardProps = {
+  title: string;
+  date: string;
+  platform: string;
+  genres: string[];
+  format: 'digital' | 'physical';
+  img: string;
+  price: string;
+  score: number | null;
+};
 
-    const date = new Date(this.props.date).toLocaleString('en-GB', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+export default function Card(props: CardProps) {
+  const genres = props.genres.map((genre, index) => (
+    <span key={index} className="genres_item">
+      {genre}
+    </span>
+  ));
 
-    return (
-      <div className="card">
-        <img className="card_image" src={this.props.img} alt="Game cover" />
-        <h3 className="card_title">{this.props.title}</h3>
-        <div className="card_genres">{genres}</div>
-        <div className="card_purchase">
-          <p className="card_price">{this.props.price}</p>
-          <p className="card_format">{this.props.format}</p>
-        </div>
-        <div className="card_score">
-          <img className="score_icon" src={icon} />
-          <span className={`score_value ${this.getScoreColorClass()}`}>
-            {this.props.score || 'N/A'}
-          </span>
-        </div>
-        <CardButtons platform={this.props.platform} />
-        <p className="card_date">Release date: {date}</p>
+  const date = new Date(props.date).toLocaleString('en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  return (
+    <div className="card">
+      <img className="card_image" src={props.img} alt="Game cover" />
+      <h3 className="card_title">{props.title}</h3>
+      <div className="card_genres">{genres}</div>
+      <div className="card_purchase">
+        <p className="card_price">{props.price}</p>
+        <p className="card_format">{props.format}</p>
       </div>
-    );
-  }
+      <div className="card_score">
+        <img className="score_icon" src={metacritic_icon} />
+        <span className={`score_value ${getScoreColorClass(props.score)}`}>
+          {props.score || 'N/A'}
+        </span>
+      </div>
+      <CardButtons platform={props.platform} />
+      <p className="card_date">Release date: {date}</p>
+    </div>
+  );
+}
 
-  getScoreColorClass() {
-    const { score } = this.props;
+function getScoreColorClass(score: CardProps['score']) {
+  if (!score) return 'score_value__missing';
+  if (score > 75) return 'score_value__high';
+  if (score > 50) return 'score_value__average';
 
-    if (!score) return 'score_value__missing';
-    if (score > 75) return 'score_value__high';
-    if (score > 50) return 'score_value__average';
-
-    return 'score_value__low';
-  }
+  return 'score_value__low';
 }
