@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { Card } from '../';
-import { CardLarge, LargeCardProps } from '../card';
+import { CardLarge } from '../card';
 import { Modal, Spinner } from '..';
-import { getRawGamesData, getDataById, type GameData } from '../../services/api';
+import { type GameData } from '../../services/api';
+import { fetchDataById, clearCurrentGame } from './gameDataSlice';
 import styles from './CardContainer.module.css';
 
-type CardContainerProps = {
-  searchQuery: string;
-};
+export default function CardContainer() {
+  const dispatch = useAppDispatch();
 
-export default function CardContainer(props: CardContainerProps) {
-  const { searchQuery } = props;
+  const data = useAppSelector((state) => state.gameData.fetchedGames);
+  const currentGameData = useAppSelector((state) => state.gameData.fetchedById);
+  const error = useAppSelector((state) => state.gameData.error);
+  const status = useAppSelector((state) => state.gameData.status);
 
-  const [data, setData] = useState<GameData[]>([]);
-  const [error, setError] = useState('');
   const [active, setActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [currentId, setCurrentId] = useState<number>();
-  const [currentGame, setCurrentGame] = useState<LargeCardProps>();
 
   const handleClick = (id: number) => {
     setActive(true);
@@ -43,36 +42,21 @@ export default function CardContainer(props: CardContainerProps) {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    const fetchData = async () => {
-      const { error, data } = await getRawGamesData(searchQuery);
-      setError(error);
-      setData(data);
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, [searchQuery]);
-
-  useEffect(() => {
     if (!currentId) return;
 
-    const fetchData = async () => {
-      const { error, data } = await getDataById(currentId);
+    dispatch(fetchDataById(currentId));
 
-      setError(error);
-      setCurrentGame(getGameObject(data));
+    return () => {
+      dispatch(clearCurrentGame());
     };
-
-    fetchData();
-
-    return () => setCurrentGame(undefined);
-  }, [currentId]);
+  }, [dispatch, currentId]);
 
   const cards = data
     .map(getGameObject)
     .map((game) => game && <Card key={game.id} {...game} onClick={handleClick} />);
-  const isEmpty = !isLoading && !cards.length && !error;
+  const currentGame = currentGameData && getGameObject(currentGameData);
+  const isEmpty = status === 'succeeded' && !cards.length && !error;
+  const isLoading = status === 'pending';
 
   return (
     <>
@@ -81,11 +65,9 @@ export default function CardContainer(props: CardContainerProps) {
         {error && <p className={styles.empty}>{error}</p>}
         {isLoading ? <Spinner /> : cards}
       </section>
-      <Modal
-        active={active}
-        setActive={setActive}
-        child={(currentGame && <CardLarge {...currentGame} />) || <Spinner />}
-      />
+      <Modal active={active} setActive={setActive}>
+        {(currentGame && <CardLarge {...currentGame} />) || <Spinner />}
+      </Modal>
     </>
   );
 }

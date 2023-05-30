@@ -67,14 +67,7 @@ async function fetchData(path: string, params: QueryParams) {
 }
 
 function createUrl(url: string, path?: string, params?: QueryParams) {
-  let query = '';
-
-  if (params) {
-    query = Object.entries(params)
-      .map(([key, value]) => `${key}=${value}`)
-      .join('&');
-  }
-
+  const query = new URLSearchParams(params);
   return `${url}${path}?${query}`;
 }
 

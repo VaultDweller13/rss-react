@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styles from './Genres.module.css';
 
 type Props = {
@@ -12,5 +13,7 @@ export function Genres({ genres, gridSpan = 'large' }: Props) {
     </span>
   ));
 
-  return <div className={`${styles.container} ${styles[gridSpan]}`}>{items}</div>;
+  const genresClass = classNames(styles.container, styles[gridSpan]);
+
+  return <div className={genresClass}>{items}</div>;
 }

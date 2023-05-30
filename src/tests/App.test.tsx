@@ -1,19 +1,35 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { fetchGamesData } from '../components/cardContainer/gameDataSlice';
 
-import { CardContainer } from '../components';
+import store from '../app/store';
 
-describe('CardContainer', () => {
+import App from '../app/App';
+
+const searchQuery = store.getState().search;
+
+store.dispatch(fetchGamesData(searchQuery));
+
+describe('App', () => {
   it('should render <Card> elements', async () => {
-    render(<CardContainer searchQuery="" />);
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
 
     expect(await screen.findByText('Fire Emblem: Three Houses')).toBeInTheDocument;
     expect(await screen.findByText('The Legend of Zelda: Breath of the Wild')).toBeInTheDocument;
   });
 });
 
-describe('CardContainer', () => {
+describe('App', () => {
   it('should render modal window on card click', async () => {
-    render(<CardContainer searchQuery="" />);
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
     const card = await screen.findByText('Fire Emblem: Three Houses');
 
     fireEvent.click(card);
@@ -27,7 +43,11 @@ describe('CardContainer', () => {
 
 describe('Modal', () => {
   it('should close, when "x" icon pressed', async () => {
-    render(<CardContainer searchQuery="" />);
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
 
     const card = await screen.findByText('Fire Emblem: Three Houses');
     fireEvent.click(card);

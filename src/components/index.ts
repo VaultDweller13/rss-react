@@ -4,7 +4,13 @@ export { default as CardContainer } from './cardContainer/CardContainer';
 export { default as Modal } from './modal/Modal';
 export { default as Navbar } from './navbar/Navbar';
 export { default as Form } from './form/Form';
-export { default as Select } from './form/Select';
 export { default as Header } from './header/Header';
 export { default as SearchBar } from './searchBar/SearchBar';
 export { default as Spinner } from './spinner/Spinner';
+export { default as searchReducer, save, searchSlice } from './searchBar/searchSlice';
+export {
+  default as gameDataReducer,
+  storeGames,
+  gameDataSlice,
+} from './cardContainer/gameDataSlice';
+export { default as formReducer, storeCard } from './form/formSlice';
