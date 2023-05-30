@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Select, Card } from '../';
+import { Select, Card, type CardProps } from '../';
 import { genres } from '../../assets';
-import './Form.css';
+import styles from './Form.module.css';
 
 type Inputs = {
   title: string;
   date: string;
   platform: string;
   genres: string[];
-  format: 'digital' | 'physical';
+  format: CardProps['format'];
   image: FileList;
 };
 
 export default function Form() {
   const form = React.createRef<HTMLFormElement>();
-  const [cards, setCards] = useState<JSX.Element[]>([]);
+  const [cardsData, setCardsData] = useState<CardProps[]>([]);
   const {
     register,
     handleSubmit,
@@ -40,48 +40,52 @@ export default function Form() {
       img: URL.createObjectURL(data.image[0]),
       price: '59.99',
       score: null,
+      onClick: () => {},
+      id: cardsData.length + 1,
     };
 
-    setCards((prevState) => [...prevState, <Card key={prevState.length + 1} {...props} />]);
+    setCardsData((prevState) => [...prevState, props]);
   };
 
+  const cards = cardsData.map((props) => <Card key={props.id} {...props} />);
+
   return (
-    <main className="wrapper form_wrapper">
-      <form className="add-game_form" aria-label="Add a game form" ref={form} onSubmit={onSubmit}>
-        <ul className="form_container">
-          <li className="form_item">
-            <label className="form_label" htmlFor="form_game-title">
+    <main className={styles.wrapper}>
+      <form className={styles.form} aria-label="Add a game form" ref={form} onSubmit={onSubmit}>
+        <ul className={styles.formContainer}>
+          <li className={styles.item}>
+            <label className={styles.label} htmlFor="form_game-title">
               Game Title:
             </label>
             <input
               type="text"
               id="form_game-title"
-              className="form_input input_text"
+              className={styles.input}
               {...register('title', { required: "You must provide the game's title" })}
             />
-            <p className="validation-message">{errors.title?.message}</p>
+            <p className={styles.validationMessage}>{errors.title?.message}</p>
           </li>
-          <li className="form_item">
-            <label className="form_label" htmlFor="form_game-date">
+          <li className={styles.item}>
+            <label className={styles.label} htmlFor="form_game-date">
               Release Date:
             </label>
             <input
               type="date"
               id="form_game-date"
-              className="form_input input_date"
+              className={styles.input}
               {...register('date', { validate: dateInputIsValid })}
             />
-            <p className="validation-message">{errors.date?.message}</p>
+            <p className={styles.validationMessage}>{errors.date?.message}</p>
           </li>
-          <li className="form_item">
+          <li className={styles.item}>
             <Select register={register} />
-            <p className="validation-message">{errors.platform?.message}</p>
+            <p className={styles.validationMessage}>{errors.platform?.message}</p>
           </li>
-          <li className="form_item">
-            <h3 className="form_label">Genres:</h3>
-            <div className="form_checkbox-container">
+          <li className={styles.item}>
+            <h3 className={styles.label}>Genres:</h3>
+            <div className={styles.checkboxContainer}>
               {genres.map((genre) => (
-                <label key={genre.id} className="labeledInput_label">
+                <label key={genre.id} className={`${styles.label} ${styles.checkboxLabel}`}>
                   <input
                     type="checkbox"
                     id={genre.genre}
@@ -92,12 +96,12 @@ export default function Form() {
                 </label>
               ))}
             </div>
-            <p className="validation-message">{errors.genres?.message}</p>
+            <p className={styles.validationMessage}>{errors.genres?.message}</p>
           </li>
-          <li className="form_item">
-            <h3 className="form_label">Format:</h3>
-            <div className="form_radio-container">
-              <label className="labeledInput_label">
+          <li className={styles.item}>
+            <h3 className={styles.label}>Format:</h3>
+            <div className={styles.radioContainer}>
+              <label className={`${styles.label} ${styles.checkboxLabel}`}>
                 <input
                   type="radio"
                   id="digital"
@@ -106,28 +110,28 @@ export default function Form() {
                 />
                 Digital
               </label>
-              <label className="labeledInput_label">
+              <label className={`${styles.label} ${styles.checkboxLabel}`}>
                 <input type="radio" id="physical" value="physical" {...register('format')} />
                 Physical
               </label>
             </div>
-            <p className="validation-message">{errors.format?.message}</p>
+            <p className={styles.validationMessage}>{errors.format?.message}</p>
           </li>
-          <li className="form_item">
-            <label className="form_label" htmlFor="form_game-cover">
+          <li className={styles.item}>
+            <label className={styles.label} htmlFor="form_game-cover">
               Cover Image
             </label>
             <input
               type="file"
               id="form_game-cover"
               accept="image/png, image/jpeg"
-              className="form_input input_file"
+              className={`${styles.input} ${styles.fileInput}`}
               {...register('image', { required: 'Please provide a cover image' })}
             />
-            <p className="validation-message">{errors.image?.message}</p>
+            <p className={styles.validationMessage}>{errors.image?.message}</p>
           </li>
-          <li className="form_item">
-            <button className="button_main">Submit</button>
+          <li className={styles.item}>
+            <button className={styles.button}>Submit</button>
           </li>
         </ul>
       </form>

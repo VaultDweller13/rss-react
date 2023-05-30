@@ -1,8 +1,10 @@
-export { default as Card } from './card/Card';
-export { default as CardButtons } from './card/CardButtons';
-export { default as CardContainer } from './card/CardContainer';
+export { Card, type CardProps } from './card/card/Card';
+export { CardLarge } from './card/cardLarge/CardLarge';
+export { default as CardContainer } from './cardContainer/CardContainer';
+export { default as Modal } from './modal/Modal';
 export { default as Navbar } from './navbar/Navbar';
 export { default as Form } from './form/Form';
 export { default as Select } from './form/Select';
 export { default as Header } from './header/Header';
 export { default as SearchBar } from './searchBar/SearchBar';
+export { default as Spinner } from './spinner/Spinner';

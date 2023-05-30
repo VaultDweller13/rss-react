@@ -1,4 +1,5 @@
 import { UseFormRegister } from 'react-hook-form';
+import styles from './Form.module.css';
 
 type SelectProps = {
   register: UseFormRegister<{
@@ -14,13 +15,13 @@ type SelectProps = {
 export default function Select(props: SelectProps) {
   return (
     <>
-      <label htmlFor="form_game-platform" className="form_label">
+      <label htmlFor="form_game-platform" className={styles.label}>
         Platform:
       </label>
       <select
         {...props.register('platform', { required: 'Please choose a platform' })}
         id="form_game-platform"
-        className="form_input input_select"
+        className={styles.input}
       >
         <option value="">--Please choose an option--</option>
         <option value="PC">PC</option>

@@ -1,0 +1,50 @@
+.container {
+  grid-column: 1/3;
+
+  display: flex;
+  gap: 5px;
+
+  padding: 10px 0;
+}
+
+.cartButton {
+  min-height: 40px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: #e31235;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ebebeb;
+}
+
+.cartButton:hover {
+  background-color: #c90f2e;
+  color: #ffffff;
+  box-shadow: rgba(201, 15, 46, 0.2) 0px 7px 29px 0px;
+
+  transition: 0.2s ease-in;
+}
+
+.wishlistButton {
+  cursor: pointer;
+  margin-right: auto;
+
+  background: none;
+  border: none;
+}
+
+.wishlistIcon {
+  width: 32px;
+}
+
+.platformLogo {
+  grid-column: 2 / 3;
+
+  width: 40px;
+  height: 40px;
+}

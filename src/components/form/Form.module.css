@@ -1,0 +1,142 @@
+.wrapper {
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 15px;
+
+  margin: 0 auto;
+
+  padding: 20px 0;
+}
+
+.form {
+  max-width: 350px;
+  padding: 5px;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 10px 10px 0px 0px;
+}
+
+.formContainer {
+  max-width: 300px;
+
+  list-style: none;
+  margin: 0 auto;
+  padding: 15px 10px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+
+  padding: 5px 0;
+}
+
+.label {
+  max-width: 300px;
+
+  margin: 0;
+  padding: 5px 0;
+
+  font-weight: normal;
+  font-size: medium;
+}
+
+.label,
+.checkboxLabel,
+.input {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.input,
+.radioContainer,
+.checkboxContainer {
+  max-width: 300px;
+  padding: 5px;
+
+  border: none;
+  background-color: rgb(229 238 245);
+}
+
+.checkboxContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.radioContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkboxLabel {
+  padding: 5px;
+}
+
+.checkboxLabel > input {
+  margin-right: 5px;
+}
+
+.fileInput {
+  padding: 0;
+  border-radius: 5px;
+
+  font-family: Roboto, sans-serif;
+  font-weight: normal;
+  font-size: medium;
+}
+
+.fileInput::file-selector-button {
+  height: 30px;
+  padding: 5px;
+  margin-right: 10px;
+
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+
+  font-family: Roboto, sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  color: #ffffff;
+  background-color: #6b99b9;
+}
+
+.fileInput::file-selector-button:hover {
+  background-color: #5582a1;
+}
+
+.validationMessage {
+  height: 17px;
+  bottom: 0;
+
+  padding-top: 2px;
+  margin: 0;
+
+  font-size: small;
+  color: #e31235;
+}
+
+.button {
+  min-height: 40px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: #e31235;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ebebeb;
+}
+
+.button:hover {
+  background-color: #c90f2e;
+  color: #ffffff;
+  box-shadow: rgba(201, 15, 46, 0.2) 0px 7px 29px 0px;
+
+  transition: 0.2s ease-in;
+}

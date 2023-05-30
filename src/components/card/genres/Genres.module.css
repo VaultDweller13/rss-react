@@ -1,0 +1,25 @@
+.container {
+  grid-column: 1 / 3;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+
+  padding: 10px 0;
+}
+
+.small {
+  grid-column: 1 / 2;
+}
+
+.large {
+  grid-column: 1 / 3;
+}
+
+.item {
+  padding: 2px 4px;
+  background-color: rgb(229 238 245);
+
+  border-radius: 5px;
+}

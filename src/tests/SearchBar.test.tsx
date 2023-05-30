@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import SearchBar from '../components/searchBar/SearchBar';
+import { SearchBar } from '../components';
 
 describe('Search bar', () => {
   it('should have search input', () => {
-    render(<SearchBar />);
+    render(<SearchBar callback={() => {}} />);
 
     expect(screen.getByRole('searchbox')).toBeInTheDocument;
   });
 
   it('should have button', () => {
-    render(<SearchBar />);
+    render(<SearchBar callback={() => {}} />);
 
     expect(screen.getByRole('button')).toBeInTheDocument;
   });
