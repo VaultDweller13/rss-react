@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "title": "Bravely Default 2",
+    "date": "02-26-2021",
+    "platform": "switch",
+    "genres": ["JRPG"],
+    "img": "1.jpg",
+    "price": "59.99€",
+    "score": 76
+  },
+  {
+    "id": 2,
+    "title": "DRAGON QUEST XI S: Echoes of an Elusive Age – Definitive Edition",
+    "date": "09-27-2019",
+    "platform": "switch",
+    "genres": ["JRPG"],
+    "img": "2.jpg",
+    "price": "59.99€",
+    "score": 91
+  },
+  {
+    "id": 3,
+    "title": "Final Fantasy VII & Final Fantasy VIII Remastered Twin Pack",
+    "date": "12-04-2020",
+    "platform": "switch",
+    "genres": ["JRPG"],
+    "img": "3.jpg",
+    "price": "59.99€",
+    "score": null
+  },
+  {
+    "id": 4,
+    "title": "Fire Emblem: Three Houses",
+    "date": "07-26-2019",
+    "platform": "switch",
+    "genres": ["TRPG", "Strategy"],
+    "img": "4.jpg",
+    "price": "59.99€",
+    "score": 89
+  },
+  {
+    "id": 5,
+    "title": "Hyrule Warriors: Age of Calamity",
+    "date": "11-20-2020",
+    "platform": "switch",
+    "genres": ["Action", "RPG"],
+    "img": "5.jpg",
+    "price": "59.99€",
+    "score": 78
+  },
+  {
+    "id": 6,
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "date": "03-03-2017",
+    "platform": "switch",
+    "genres": ["Action", "Adventure"],
+    "img": "6.jpg",
+    "price": "59.99€",
+    "score": 97
+  },
+  {
+    "id": 7,
+    "title": "The Legend of Zelda: Skyward Sword HD",
+    "date": "07-16-2021",
+    "platform": "switch",
+    "genres": ["Action", "Adventure"],
+    "img": "7.jpg",
+    "price": "59.99€",
+    "score": 81
+  },
+  {
+    "id": 8,
+    "title": "Luigi’s Mansion 3",
+    "date": "10-31-2019",
+    "platform": "switch",
+    "genres": ["Adventure", "Puzzle"],
+    "img": "8.jpg",
+    "price": "59.99€",
+    "score": 86
+  },
+  {
+    "id": 9,
+    "title": "New Super Mario Bros. U Deluxe",
+    "date": "01-11-2019",
+    "platform": "switch",
+    "genres": ["Platform"],
+    "img": "9.jpg",
+    "price": "59.99€",
+    "score": 80
+  },
+  {
+    "id": 10,
+    "title": "Pokémon Mystery Dungeon: Rescue Team DX",
+    "date": "03-06-2020",
+    "platform": "switch",
+    "genres": ["RPG"],
+    "img": "10.jpg",
+    "price": "59.99€",
+    "score": 69
+  },
+  {
+    "id": 11,
+    "title": "Super Mario 3D All-Stars",
+    "date": "09-18-2020",
+    "platform": "switch",
+    "genres": ["Platform"],
+    "img": "11.jpg",
+    "price": "59.99€",
+    "score": 82
+  },
+  {
+    "id": 12,
+    "title": "Super Mario 3D World + Bowser’s Fury",
+    "date": "02-12-2021",
+    "platform": "switch",
+    "genres": ["Platform"],
+    "img": "12.jpg",
+    "price": "59.99€",
+    "score": 89
+  },
+  {
+    "id": 13,
+    "title": "ASTRAL CHAIN",
+    "date": "08-30-2019",
+    "platform": "switch",
+    "genres": ["Action"],
+    "img": "13.jpg",
+    "price": "59.99€",
+    "score": 87
+  }
+]
