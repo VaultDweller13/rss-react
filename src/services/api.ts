@@ -28,7 +28,7 @@ async function getRawGamesData(search = '') {
   const params = {
     platforms: Platforms.SWITCH,
     ordering: '-metacritic',
-    search: search,
+    search,
     search_precise: 'false',
     key: API_KEY,
   };
