@@ -10,7 +10,7 @@ export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchGamesData(searchQuery));
+    dispatch(fetchGamesData({ query: searchQuery, page: '1' }));
   });
 
   return (

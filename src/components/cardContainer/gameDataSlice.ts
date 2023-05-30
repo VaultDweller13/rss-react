@@ -55,10 +55,13 @@ export const gameDataSlice = createSlice({
   },
 });
 
-export const fetchGamesData = createAsyncThunk('gameData/fetchGames', async (query: string) => {
-  const response = await getRawGamesData(query);
-  return response;
-});
+export const fetchGamesData = createAsyncThunk(
+  'gameData/fetchGames',
+  async ({ query, page }: { query: string; page: string }) => {
+    const response = await getRawGamesData(query, page);
+    return response;
+  }
+);
 
 export const fetchDataById = createAsyncThunk('gameData/fetchById', async (id: number) => {
   const response = await getDataById(id);

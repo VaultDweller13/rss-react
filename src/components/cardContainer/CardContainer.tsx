@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import { Card } from '../';
+import { Card, Modal, Spinner, Pagination } from '../';
 import { CardLarge } from '../card';
-import { Modal, Spinner } from '..';
 import { type GameData } from '../../services/api';
 import { fetchDataById, clearCurrentGame } from './gameDataSlice';
 import styles from './CardContainer.module.css';
@@ -65,6 +64,7 @@ export default function CardContainer() {
         {error && <p className={styles.empty}>{error}</p>}
         {isLoading ? <Spinner /> : cards}
       </section>
+      <Pagination />
       <Modal active={active} setActive={setActive}>
         {(currentGame && <CardLarge {...currentGame} />) || <Spinner />}
       </Modal>
