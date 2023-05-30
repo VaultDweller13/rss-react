@@ -1,21 +1,61 @@
-# rss-react
+# Game library & backlog tracking app
 
-### Dev server:
+## Deploy
 
-`npm run dev`
+[Click here](https://your-game-backlog.netlify.app)
 
-### Build:
+## Starting app on a local machine
 
-`npm run build`
+1. Clone repository:
+   ```bash
+   git clone https://github.com/VaultDweller13/rss-react.git
+   ```
+2. Navigate to the project directory:
 
-### Preview:
+   ```bash
+   cd rss-react
+   ```
 
-`npm run preview`
+3. Install dependencies:
 
-### Lint:
+   ```bash
+   npm install
+   ```
 
-`npm run lint`
+4. You'll need your own API key from https://rawg.io/apidocs. Create `.env.local` file in the root directory and put inside the following string:
 
-### Test:
+   ```
+   VITE_API_KEY = your_api_key
+   ```
 
-`npm run test`
+5. Run one of the following commands:
+
+   ### Dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+   ### Build:
+
+   ```bash
+   npm run build
+   ```
+
+   ### Preview:
+
+   ```bash
+   npm run preview
+   ```
+
+   ### Lint:
+
+   ```bash
+   npm run lint
+   ```
+
+   ### Test:
+
+   ```bash
+   npm run test
+   ```
