@@ -1,4 +1,4 @@
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = process.env.VITE_API_KEY;
 const endpoint = 'https://api.rawg.io/api/games';
 
 type QueryParams = Record<string, string>;
