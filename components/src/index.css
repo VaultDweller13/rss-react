@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  font-family: Roboto, sans-serif;
+}
+
+.wrapper,
+.header_wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #e31235;
+  color: #ffffff;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 15px;
+}
+
+.nav_link {
+  color: #ffffff;
+  text-decoration: none;
+}
+.nav_link:hover {
+  text-decoration: underline;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+
+  padding: 20px 0;
+}
+
+.not-found {
+  font-size: 128px;
+  text-align: center;
+}
