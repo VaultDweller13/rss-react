@@ -6,9 +6,9 @@ import store from '../app/store';
 
 import App from '../app/App';
 
-const searchQuery = store.getState().search;
+const query = store.getState().search;
 
-store.dispatch(fetchGamesData(searchQuery));
+store.dispatch(fetchGamesData({ query }));
 
 describe('App', () => {
   it('should render <Card> elements', async () => {
