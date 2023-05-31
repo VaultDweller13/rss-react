@@ -7,6 +7,7 @@ import { ChangeEvent, useCallback } from 'react';
 export default function Pagination() {
   const dispatch = useAppDispatch();
   const query = useAppSelector((store) => store.search);
+  const gamesCount = useAppSelector((store) => store.gameData.count);
 
   const handleChange = useCallback(
     (_: ChangeEvent<unknown>, page: number) => {
@@ -17,7 +18,7 @@ export default function Pagination() {
 
   return (
     <div className={styles.pagination}>
-      <DefaultPagination count={10} onChange={handleChange} />
+      <DefaultPagination count={Math.ceil(gamesCount / 20)} onChange={handleChange} />
     </div>
   );
 }

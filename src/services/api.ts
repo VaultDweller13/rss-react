@@ -2,7 +2,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 const endpoint = 'https://api.rawg.io/api/games';
 
 type QueryParams = Record<string, string>;
-type RawGameData = { results: [] };
+type RawGameData = { count: number; results: [] };
 type BaseEntity = {
   id: number;
   name: string;
@@ -37,7 +37,10 @@ async function getRawGamesData(search = '', page?: number) {
 
   const { error, data } = await fetchData('', params);
 
-  return { error, data: ((data as RawGameData).results || []) as GameData[] };
+  return {
+    error,
+    data: { ...(data as RawGameData) },
+  };
 }
 
 async function getDataById(id: number) {

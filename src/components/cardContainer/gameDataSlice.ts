@@ -10,6 +10,7 @@ type FetchGamesParams = {
 };
 
 type GameDataState = {
+  count: number;
   fetchedGames: GameData[];
   fetchedById: GameData | null;
   status: FetchStatus;
@@ -17,6 +18,7 @@ type GameDataState = {
 };
 
 const initialState: GameDataState = {
+  count: 0,
   fetchedGames: [],
   fetchedById: null,
   status: 'idle',
@@ -28,7 +30,8 @@ export const gameDataSlice = createSlice({
   initialState,
   reducers: {
     storeGames: (state, action: PayloadAction<GameDataResponse>) => {
-      state.fetchedGames = action.payload.data;
+      state.count = action.payload.data.count;
+      state.fetchedGames = action.payload.data.results;
       state.error = action.payload.error;
     },
     storeCurrentGame: (state, action: PayloadAction<GameDataByIdResponse>) => {
@@ -45,11 +48,13 @@ export const gameDataSlice = createSlice({
     });
     builder.addCase(fetchGamesData.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.fetchedGames = action.payload.data;
+      state.count = action.payload.data.count;
+      state.fetchedGames = action.payload.data.results;
       state.error = action.payload.error;
     });
     builder.addCase(fetchGamesData.rejected, (state, action) => {
       state.status = 'failed';
+      state.count = 0;
       state.error = action.error.message || '';
     });
     builder.addCase(fetchDataById.fulfilled, (state, action) => {
