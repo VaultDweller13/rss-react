@@ -4,8 +4,13 @@ import { getRawGamesData, getDataById, type GameData } from '../../services/api'
 type GameDataResponse = Awaited<ReturnType<typeof getRawGamesData>>;
 type GameDataByIdResponse = Awaited<ReturnType<typeof getDataById>>;
 type FetchStatus = 'idle' | 'pending' | 'succeeded' | 'failed';
+type FetchGamesParams = {
+  query: string;
+  page?: number;
+};
 
 type GameDataState = {
+  count: number;
   fetchedGames: GameData[];
   fetchedById: GameData | null;
   status: FetchStatus;
@@ -13,6 +18,7 @@ type GameDataState = {
 };
 
 const initialState: GameDataState = {
+  count: 0,
   fetchedGames: [],
   fetchedById: null,
   status: 'idle',
@@ -24,7 +30,8 @@ export const gameDataSlice = createSlice({
   initialState,
   reducers: {
     storeGames: (state, action: PayloadAction<GameDataResponse>) => {
-      state.fetchedGames = action.payload.data;
+      state.count = action.payload.data.count;
+      state.fetchedGames = action.payload.data.results;
       state.error = action.payload.error;
     },
     storeCurrentGame: (state, action: PayloadAction<GameDataByIdResponse>) => {
@@ -41,11 +48,13 @@ export const gameDataSlice = createSlice({
     });
     builder.addCase(fetchGamesData.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.fetchedGames = action.payload.data;
+      state.count = action.payload.data.count;
+      state.fetchedGames = action.payload.data.results;
       state.error = action.payload.error;
     });
     builder.addCase(fetchGamesData.rejected, (state, action) => {
       state.status = 'failed';
+      state.count = 0;
       state.error = action.error.message || '';
     });
     builder.addCase(fetchDataById.fulfilled, (state, action) => {
@@ -55,10 +64,13 @@ export const gameDataSlice = createSlice({
   },
 });
 
-export const fetchGamesData = createAsyncThunk('gameData/fetchGames', async (query: string) => {
-  const response = await getRawGamesData(query);
-  return response;
-});
+export const fetchGamesData = createAsyncThunk(
+  'gameData/fetchGames',
+  async ({ query, page }: FetchGamesParams) => {
+    const response = await getRawGamesData(query, page);
+    return response;
+  }
+);
 
 export const fetchDataById = createAsyncThunk('gameData/fetchById', async (id: number) => {
   const response = await getDataById(id);
