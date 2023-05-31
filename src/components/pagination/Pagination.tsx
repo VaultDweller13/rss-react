@@ -10,7 +10,7 @@ export default function Pagination() {
 
   const handleChange = useCallback(
     (_: ChangeEvent<unknown>, page: number) => {
-      dispatch(fetchGamesData({ query, page: String(page) }));
+      dispatch(fetchGamesData({ query, page }));
     },
     [dispatch, query]
   );

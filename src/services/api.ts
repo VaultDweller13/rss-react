@@ -24,13 +24,14 @@ enum Platforms {
   SWITCH = '7',
 }
 
-async function getRawGamesData(search = '', page: string) {
+async function getRawGamesData(search = '', page?: number) {
+  const pageNumber = page ? String(page) : '1';
   const params = {
     platforms: Platforms.SWITCH,
     ordering: '-metacritic',
     search,
     search_precise: 'false',
-    page,
+    page: pageNumber,
     key: API_KEY,
   };
 

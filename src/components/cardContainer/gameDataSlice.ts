@@ -4,6 +4,10 @@ import { getRawGamesData, getDataById, type GameData } from '../../services/api'
 type GameDataResponse = Awaited<ReturnType<typeof getRawGamesData>>;
 type GameDataByIdResponse = Awaited<ReturnType<typeof getDataById>>;
 type FetchStatus = 'idle' | 'pending' | 'succeeded' | 'failed';
+type FetchGamesParams = {
+  query: string;
+  page?: number;
+};
 
 type GameDataState = {
   fetchedGames: GameData[];
@@ -57,7 +61,7 @@ export const gameDataSlice = createSlice({
 
 export const fetchGamesData = createAsyncThunk(
   'gameData/fetchGames',
-  async ({ query, page }: { query: string; page: string }) => {
+  async ({ query, page }: FetchGamesParams) => {
     const response = await getRawGamesData(query, page);
     return response;
   }

@@ -6,11 +6,11 @@ import { useAppDispatch, useAppSelector } from './hooks';
 import { fetchGamesData } from '../components/cardContainer/gameDataSlice';
 
 export default function App() {
-  const searchQuery = useAppSelector((state) => state.search);
+  const query = useAppSelector((state) => state.search);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchGamesData({ query: searchQuery, page: '1' }));
+    dispatch(fetchGamesData({ query }));
   });
 
   return (
