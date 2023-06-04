@@ -1,3 +1,6 @@
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
 import { Navbar } from '../';
 
 type HeaderProps = {
@@ -9,7 +12,10 @@ export default function Header(props: HeaderProps) {
     <header className="header">
       <div className="header_wrapper">
         <h1>{props.currentPage}</h1>
-        <Navbar />
+        {/* <Navbar /> */}
+        <Button variant="contained" component={Link} to="/authentication">
+          Sign in
+        </Button>
       </div>
     </header>
   );

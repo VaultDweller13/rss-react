@@ -15,3 +15,4 @@ export {
 } from './cardContainer/gameDataSlice';
 export { default as formReducer, storeCard } from './form/formSlice';
 export { default as Pagination } from './pagination/Pagination';
+export { default as SignInForm } from './authForm/Form';
