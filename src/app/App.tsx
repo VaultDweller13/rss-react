@@ -17,7 +17,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/authentication" element={<Authentication />} />
+        <Route path="/signIn" element={<Authentication type="signIn" />} />
+        <Route path="/signUp" element={<Authentication type="signUp" />} />
         <Route path="/form" element={<FormPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/404" element={<NotFound />} />
