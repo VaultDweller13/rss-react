@@ -7,7 +7,7 @@ type AuthProps = {
 export const Authentication = ({ type }: AuthProps) => {
   return (
     <>
-      <Header currentPage={type === 'signIn' ? 'Sign in' : 'Sign up'} />
+      <Header currentPage={type} />
       {type === 'signIn' ? <SignInForm /> : <SignUpForm />}
     </>
   );
