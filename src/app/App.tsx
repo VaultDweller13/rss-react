@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Home, NotFound, About, FormPage, Authentication } from '../pages';
+import { Home, NotFound, About, FormPage, Authentication, Profile } from '../pages';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchGamesData } from '../components/cardContainer/gameDataSlice';
 import { MainLayout, AuthLayout } from '../layouts';
@@ -19,9 +19,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route element={<AuthLayout />}>
+          <Route element={<AuthLayout forLogged={false} />}>
             <Route path="signIn" element={<Authentication type="signIn" />} />
             <Route path="signUp" element={<Authentication type="signUp" />} />
+          </Route>
+          <Route element={<AuthLayout forLogged />}>
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="form" element={<FormPage />} />
           <Route path="about" element={<About />} />

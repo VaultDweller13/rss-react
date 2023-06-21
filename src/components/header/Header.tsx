@@ -17,9 +17,14 @@ export default function Header() {
         </Link>
         <div className={styles.button_container}>
           {user ? (
-            <Button variant="contained" onClick={logOut}>
-              Log out
-            </Button>
+            <>
+              <Button variant="contained" onClick={logOut}>
+                Log out
+              </Button>
+              <Button variant="contained" component={Link} to="/profile">
+                Profile
+              </Button>
+            </>
           ) : (
             <Button variant="contained" component={Link} to="/signIn">
               Sign in
