@@ -7,7 +7,7 @@ import { useAuthState } from '../../hooks';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const { user } = useAuthState();
+  const { user, loading } = useAuthState();
 
   return (
     <header className={styles.header}>
@@ -16,20 +16,21 @@ export default function Header() {
           <h1>YourGames</h1>
         </Link>
         <div className={styles.button_container}>
-          {user ? (
-            <>
-              <Button variant="contained" onClick={logOut}>
-                Log out
+          {!loading &&
+            (user ? (
+              <>
+                <Button variant="contained" onClick={logOut}>
+                  Log out
+                </Button>
+                <Button variant="contained" component={Link} to="/profile">
+                  Profile
+                </Button>
+              </>
+            ) : (
+              <Button variant="contained" component={Link} to="/signIn">
+                Sign in
               </Button>
-              <Button variant="contained" component={Link} to="/profile">
-                Profile
-              </Button>
-            </>
-          ) : (
-            <Button variant="contained" component={Link} to="/signIn">
-              Sign in
-            </Button>
-          )}
+            ))}
         </div>
       </div>
     </header>
