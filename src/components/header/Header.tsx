@@ -6,13 +6,8 @@ import { useAuthState } from '../../hooks';
 
 import styles from './Header.module.css';
 
-type HeaderProps = {
-  currentPage?: string;
-};
-
-export default function Header({ currentPage }: HeaderProps) {
+export default function Header() {
   const user = useAuthState();
-  const isAuthPage = currentPage === 'signIn' || currentPage === 'signUp';
 
   return (
     <header className={styles.header}>
@@ -21,14 +16,13 @@ export default function Header({ currentPage }: HeaderProps) {
           <h1>YourGames</h1>
         </Link>
         <div className={styles.button_container}>
-          {!isAuthPage && !user && (
-            <Button variant="contained" component={Link} to="/signIn">
-              Sign in
-            </Button>
-          )}
-          {user && (
+          {user ? (
             <Button variant="contained" onClick={logOut}>
               Log out
+            </Button>
+          ) : (
+            <Button variant="contained" component={Link} to="/signIn">
+              Sign in
             </Button>
           )}
         </div>
