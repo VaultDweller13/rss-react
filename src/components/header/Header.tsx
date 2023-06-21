@@ -7,7 +7,7 @@ import { useAuthState } from '../../hooks';
 import styles from './Header.module.css';
 
 type HeaderProps = {
-  currentPage: string;
+  currentPage?: string;
 };
 
 export default function Header({ currentPage }: HeaderProps) {
