@@ -7,7 +7,7 @@ import { useAuthState } from '../../hooks';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const user = useAuthState();
+  const { user } = useAuthState();
 
   return (
     <header className={styles.header}>

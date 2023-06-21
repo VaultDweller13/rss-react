@@ -1,18 +1,15 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useCallback, useRef } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 
 import { logIn } from '../../services/firebase';
-import { useAuthState } from '../../hooks';
 import styles from './Form.module.css';
 
 export default function SignInForm() {
-  const user = useAuthState();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const handleSubmit = useCallback(async () => {
     const email = emailRef.current?.value;
@@ -22,10 +19,6 @@ export default function SignInForm() {
       await logIn(email, password);
     }
   }, [emailRef, passwordRef]);
-
-  useEffect(() => {
-    if (user) navigate('/');
-  }, [user, navigate]);
 
   return (
     <>

@@ -6,14 +6,18 @@ type User = typeof auth.currentUser;
 
 export const useAuthState = () => {
   const [user, setUser] = useState<User>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+
     const listener = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
 
     return () => listener();
   }, []);
 
-  return user;
+  return { user, loading };
 };

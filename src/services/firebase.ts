@@ -41,3 +41,5 @@ export const logOut = async () => {
     console.error(error);
   }
 };
+
+export type User = typeof auth.currentUser;
