@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  max-width: 20%;
+  margin: 200px auto;
+}
+
+.link {
+  align-self: center;
+}

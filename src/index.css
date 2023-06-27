@@ -9,21 +9,9 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-.wrapper,
-.header_wrapper {
+.wrapper {
   max-width: 1440px;
   margin: 0 auto;
-}
-
-.header {
-  background-color: #e31235;
-  color: #ffffff;
-}
-
-.header_wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .nav {

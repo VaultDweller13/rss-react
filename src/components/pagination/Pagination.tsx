@@ -1,6 +1,6 @@
 import { Pagination as DefaultPagination } from '@mui/material/';
 import styles from './Pagination.module.css';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchGamesData } from '../../components/cardContainer/gameDataSlice';
 import { ChangeEvent, useCallback } from 'react';
 

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { save } from '../searchBar/searchSlice';
 
 import styles from './SearchBar.module.css';

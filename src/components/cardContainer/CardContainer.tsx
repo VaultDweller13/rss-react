@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { Card, Modal, Spinner, Pagination } from '../';
 import { CardLarge } from '../card';

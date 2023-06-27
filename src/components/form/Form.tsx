@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Select, DateInput, Format, Genres, Title } from './';
 import { Card, type CardProps } from '../';
 import styles from './Form.module.css';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { storeCard } from './formSlice';
 
 export type Inputs = {
