@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 import { logOut } from '../../services/firebase';
 import { useAuthState } from '../../hooks';
@@ -22,9 +23,9 @@ export default function Header() {
                 <Button variant="contained" onClick={logOut}>
                   Log out
                 </Button>
-                <Button variant="contained" component={Link} to="/profile">
-                  Profile
-                </Button>
+                <Link to="/profile" className={styles.link}>
+                  <AccountCircleOutlinedIcon fontSize="large" />
+                </Link>
               </>
             ) : (
               <Button variant="contained" component={Link} to="/signIn">
