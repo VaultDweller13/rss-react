@@ -1,5 +1,5 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
-const endpoint = 'https://api.rawg.io/api/games';
+const endpoint = 'https://api.rawg.io/api/';
 
 type QueryParams = Record<string, string>;
 type RawGameData = { count: number; results: [] };
@@ -19,6 +19,13 @@ type GameData = {
   description?: string;
 };
 
+type GenreData = {
+  id: number;
+  name: string;
+  count: number;
+  image: string;
+};
+
 enum Platforms {
   PC = '1',
   SWITCH = '7',
@@ -32,10 +39,9 @@ async function getRawGamesData(search = '', page?: number) {
     search,
     search_precise: 'false',
     page: pageNumber,
-    key: API_KEY,
   };
 
-  const { error, data } = await fetchData('', params);
+  const { error, data } = await fetchData('games', params);
 
   return {
     error,
@@ -44,15 +50,23 @@ async function getRawGamesData(search = '', page?: number) {
 }
 
 async function getDataById(id: number) {
-  const { error, data } = await fetchData(`/${id}`, {
-    key: API_KEY,
-  });
+  const { error, data } = await fetchData(`games/${id}`);
 
   return { error, data: data as GameData };
 }
 
-async function fetchData(path: string, params: QueryParams) {
-  const url = createUrl(endpoint, path, params);
+async function getGenres() {
+  const { error, data } = await fetchData('genres');
+
+  return { error, data: (data as { result: GenreData[] }).result };
+}
+
+async function fetchData(path: string, params?: QueryParams) {
+  const searchParams = new URLSearchParams(params);
+  searchParams.set('key', API_KEY);
+  const url = new URL(path, endpoint);
+  url.search = searchParams.toString();
+
   const result: { error: string; data: unknown } = {
     error: '',
     data: [],
@@ -71,9 +85,4 @@ async function fetchData(path: string, params: QueryParams) {
   return result;
 }
 
-function createUrl(url: string, path?: string, params?: QueryParams) {
-  const query = new URLSearchParams(params);
-  return `${url}${path}?${query}`;
-}
-
-export { getRawGamesData, getDataById, type GameData };
+export { getRawGamesData, getDataById, getGenres, type GameData };
