@@ -58,7 +58,7 @@ async function getDataById(id: number) {
 async function getGenres() {
   const { error, data } = await fetchData('genres');
 
-  return { error, data: (data as { result: GenreData[] }).result };
+  return { error, data: (data as { results: GenreData[] }).results };
 }
 
 async function fetchData(path: string, params?: QueryParams) {
